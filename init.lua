@@ -77,7 +77,7 @@ return require('packer').startup(function(use)
   }
 
   for i, name in ipairs(configs) do
-    require('init/' .. name).init(use)
+    require('plugins/' .. name).init(use)
   end
 
   -- auto compile packer when config is changed

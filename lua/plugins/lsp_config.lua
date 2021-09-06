@@ -14,14 +14,12 @@ function module.init(use)
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-nvim-lua' },
-      { 'glepnir/lspsaga.nvim' },
       { 'onsails/lspkind-nvim' },
       { 'folke/lsp-colors.nvim' },
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' } ,
     },
     config = function()
       local lspconfig = require('lspconfig')
-      local saga = require('lspsaga')
       local cmp = require('cmp')
       local lspkind = require('lspkind')
 
@@ -49,8 +47,6 @@ function module.init(use)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-      saga.init_lsp_saga()
-
       local on_attach = function(client, bufnr)
         -- use null-ls for formatting
         client.resolved_capabilities.document_formatting = false
@@ -59,19 +55,19 @@ function module.init(use)
 
         -- Mappings.
         local opts = { noremap=true, silent=true }
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'v', 'ga', "<cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        -- vim.api.nvim_buf_set_keymap(bufnr, 'v', 'ga', "<cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
         -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', "<silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>", opts)
+        -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
         -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics({ focusable = false })<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 
         -- signature help
         -- require "lsp_signature".on_attach({

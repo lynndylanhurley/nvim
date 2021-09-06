@@ -14,6 +14,7 @@ function module.init(use)
       map('', '<leader>t', '<cmd>Telescope find_files<cr>')
       map('', '<leader>/', '<cmd>Telescope live_grep<cr>')
       map('', '<leader>b', '<cmd>Telescope buffers<cr>')
+      map('', '<leader>c', '<cmd>Telescope git_commits<cr>')
     end
   }
 end
