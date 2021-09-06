@@ -9,7 +9,7 @@ function module.init(use)
         operator_mapping = "<leader>c<space>"
       })
 
-      map('n', '<leader><space>', ':CommentToggle<cr>', { noremap = true, silent = true })
+      map('n', '<leader>c<space>', ':CommentToggle<cr>', { noremap = true, silent = true })
     end
   }
 end
