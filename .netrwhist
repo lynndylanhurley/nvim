@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/Users/lynn/Code/Mess/plume/src/web/wp-content/themes/homepass/dev/assets/scss/sections'
+let g:netrw_dirhist_4='/Users/lynn/Code/Graphite/graphite/tests/schemas'
+let g:netrw_dirhist_3='/Users/lynn/Code/Graphite/graphite/tests_bk/common/basic_schema'
+let g:netrw_dirhist_2='/Users/lynn/Code/Graphite/graphite/config'
+let g:netrw_dirhist_1='/Users/lynn/Code/Graphite/graphite/src/resources'
+let g:netrw_dirhist_0='/Users/lynn/Code/Graphite/graphite/lib/graphite-resource-derive/tests/common'
+let g:netrw_dirhist_9='/Users/lynn/Code/Graphite/graphite/lib/graphite-resource-derive/tests'
+let g:netrw_dirhist_8='/Users/lynn/Code/Graphite/graphite/lib/graphite-auth/src/resources'
+let g:netrw_dirhist_7='/Users/lynn/Code/Graphite/graphite/src/module_loader'
+let g:netrw_dirhist_6='/Users/lynn/Code/Graphite/graphite/lib/graphite-client-js/harness'
