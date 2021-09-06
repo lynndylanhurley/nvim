@@ -5,7 +5,6 @@ function module.init(use)
     'neovim/nvim-lspconfig',
     requires = {
       { 'alexaandru/nvim-lspupdate' },
-      -- { 'quangnguyen30192/cmp-nvim-ultisnips' },
       { 'dcampos/nvim-snippy' },
       { 'dcampos/cmp-snippy' },
       { 'ray-x/lsp_signature.nvim' },
@@ -26,13 +25,11 @@ function module.init(use)
       local servers = {
         'cssls',
         'bashls',
-        -- 'diagnosticls',
         'dockerls',
         'flow',
         'gopls',
         'html',
         'intelephense',
-        -- 'tsserver',
         'pyright',
         'jsonls',
         'rust_analyzer',
@@ -70,12 +67,12 @@ function module.init(use)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 
         -- signature help
-        -- require "lsp_signature".on_attach({
-        --   bind = true,
-        --   handler_opts = {
-        --     border = "single"
-        --   }
-        -- })
+        require "lsp_signature".on_attach({
+          bind = true,
+          handler_opts = {
+            border = "single"
+          }
+        })
       end
 
       local on_tsserver_attach = function(client, bufnr)
@@ -107,11 +104,15 @@ function module.init(use)
 
         completion = {
           completeopt = 'menu,menuone,noinsert',
+          keyword_length = 2,
+        },
+
+        experimental = {
+          ghost_text = true,
         },
 
         -- You should specify your *installed* sources.
         sources = {
-          -- { name = 'ultisnips' },
           { name = 'snippy' },
           { name = 'nvim_lsp' },
           { name = 'path' },

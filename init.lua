@@ -21,7 +21,8 @@ return require('packer').startup(function(use)
     -- appearance
     'devicons',
     'hexokinase',
-    'galaxyline',
+    -- 'galaxyline',
+    'lualine',
     'indent_blankline',
 
     -- syntax
@@ -68,8 +69,8 @@ return require('packer').startup(function(use)
     'dashboard',
 
     -- system
-    'floaterm',
-    -- 'fterm',
+    -- 'floaterm',
+    'fterm',
 
     -- git
     'gitsigns',

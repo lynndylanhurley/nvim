@@ -11,11 +11,12 @@ function module.init(use)
           x = 0.5,
           y = 0.5
         },
-        border = 'single' -- or 'double'
+        border = 'single', -- or 'double'
+        auto_close = true,
       })
       local opts = { noremap = true, silent = true }
       map('n', '<leader><space>', '<cmd>lua require("Fterm").toggle()<cr>', opts)
-      map('t', '<leader><space>', '<c-\\><c-n><cmd>lua require("FTerm").toggle()<cr>', opts)
+      map('t', '<leader><space>', '<c-\\><c-n><cmd>lua require("FTerm").close()<cr>', opts)
     end
   }
 end
