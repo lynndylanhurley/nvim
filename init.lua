@@ -73,7 +73,9 @@ return require('packer').startup(function(use)
 
     -- git
     'gitsigns',
-    'fugitive'
+    'fugitive',
+    -- 'flog',
+    'gv'
   }
 
   for i, name in ipairs(configs) do

@@ -8,7 +8,6 @@ function module.init(use)
       { 'dcampos/cmp-snippy' }
     },
   }
-
 end
 
 return module
