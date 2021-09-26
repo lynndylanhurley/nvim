@@ -104,16 +104,11 @@ function module.init(use)
 
         completion = {
           completeopt = 'menu,menuone,noinsert',
-          keyword_length = 2,
-        },
-
-        experimental = {
-          ghost_text = true,
         },
 
         -- You should specify your *installed* sources.
         sources = {
-          { name = 'snippy' },
+          { name = 'snippy', keyword_length = 2 },
           { name = 'nvim_lsp' },
           { name = 'path' },
           { name = 'buffer' },

@@ -2,7 +2,7 @@ local module = {}
 
 function module.init(use)
   use {
-    'hoob3rt/lualine.nvim',
+    'shadmansaleh/lualine.nvim',
     requires = {
       {'kyazdani42/nvim-web-devicons', opt = true},
       {'EdenEast/nightfox.nvim'},

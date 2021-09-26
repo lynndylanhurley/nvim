@@ -15,6 +15,9 @@ return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   local configs = {
+    -- speed up nvim load time
+    'impatient',
+
     -- colorschemes
     'nightfox',
 
@@ -23,6 +26,7 @@ return require('packer').startup(function(use)
     'hexokinase',
     -- 'galaxyline',
     'lualine',
+    -- 'feline',
     'indent_blankline',
 
     -- syntax
@@ -41,11 +45,12 @@ return require('packer').startup(function(use)
     'wordmotion',
     'rsi', -- alt / backspace support
     -- 'yoink', -- TODO: fix this one
+    'wilder',
 
     -- file navigation
     'nvim_tree',
-    -- 'fzf',
-    'telescope',
+    'fzf',
+    -- 'telescope',
 
     -- buffer navigation
     'lightspeed',
@@ -54,6 +59,9 @@ return require('packer').startup(function(use)
 
     -- help
     'which_key',
+
+    -- language specific
+    'package_info', -- package.json helper
 
     -- lsp
     'trouble',

@@ -23,7 +23,7 @@ function module.init(use)
           null_ls.builtins.formatting.nginx_beautifier,
           null_ls.builtins.formatting.phpcbf,
           null_ls.builtins.formatting.rustfmt,
-          null_ls.builtins.formatting.rufo,
+          null_ls.builtins.formatting.rubocop,
           null_ls.builtins.formatting.sqlformat,
           null_ls.builtins.formatting.shfmt,
 
