@@ -20,14 +20,19 @@ return require('packer').startup(function(use)
 
     -- colorschemes
     'nightfox',
+    -- 'sonokai',
+    -- 'material',
+    -- 'tokyo_night',
+    -- 'seoul256',
+    -- 'github_theme',
 
     -- appearance
     'devicons',
     'hexokinase',
     -- 'galaxyline',
-    'lualine',
     -- 'feline',
     'indent_blankline',
+    'lualine',
 
     -- syntax
     'treesitter',
@@ -74,11 +79,13 @@ return require('packer').startup(function(use)
     'null_ls_config',
 
     -- fun
-    'dashboard',
+    -- 'dashboard',
+    'alpha',
 
     -- system
     -- 'floaterm',
     'fterm',
+    'hologram',
 
     -- git
     'gitsigns',

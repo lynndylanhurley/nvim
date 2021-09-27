@@ -2,9 +2,10 @@ local module = {}
 
 function module.init(use)
   use {
-    'lewis6991/impatient.nvim',
+    'sainnhe/sonokai',
     config = function()
-      require('impatient')
+      vim.g.sonokai_style = 'atlantis'
+      vim.cmd('colorscheme sonokai')
     end
   }
 end

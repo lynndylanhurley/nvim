@@ -2,12 +2,12 @@ local module = {}
 
 function module.init(use)
   use {
-    'glepnir/dashboard-nvim', 
+    'goolord/alpha-nvim',
+    requires = {'kyazdani42/nvim-web-devicons'},
     config = function()
-      vim.g.dashboard_default_executive = 'fzf'
-      vim.g.mapleader=","
-      vim.g.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard' }
-      vim.g.dashboard_custom_header = {
+      local alpha = require'alpha'
+      local dashboard = require 'alpha.themes.dashboard'
+      dashboard.section.header.val = {
         [[                                 ]],
         [[                --      --       ]],
         [[              .:"  | .:'' |      ]],
@@ -26,9 +26,9 @@ function module.init(use)
         [[  \_______|,...____;_;_|../_;_|  ]],
         [[                                 ]],
       }
+      alpha.setup(dashboard.opts)
     end
   }
 end
 
 return module
-

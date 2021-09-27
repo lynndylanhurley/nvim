@@ -2,9 +2,10 @@ local module = {}
 
 function module.init(use)
   use {
-    'lewis6991/impatient.nvim',
+    'folke/tokyonight.nvim',
     config = function()
-      require('impatient')
+      vim.g.tokyonight_style = "night"
+      vim.cmd[[colorscheme tokyonight]]
     end
   }
 end

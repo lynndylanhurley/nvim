@@ -5,9 +5,19 @@ function module.init(use)
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
-      vim.g.nvim_tree_auto_open = 1
-      vim.g.nvim_tree_auto_close = 1
-      vim.g.nvim_tree_ignore = { '.DS_Store' }
+      require'nvim-tree'.setup {
+        open_on_setup = true,
+        auto_close = false,
+        ignore_list = { '.DS_Store' },
+        view = {
+          mappings = {
+            list = {
+              { key = "o", cb = ":lua NvimTreeOSOpen()<cr>" }
+            }
+          }
+        }
+      }
+
       vim.g.nvim_tree_show_icons = {
         git = 0,
         folders = 1,
@@ -23,10 +33,6 @@ function module.init(use)
           vim.fn.jobstart("open '" .. node.absolute_path .. "' &", {detach = true})
         end
       end
-
-      vim.g.nvim_tree_bindings = {
-        { key = "o", cb = ":lua NvimTreeOSOpen()<cr>" }
-      }
 
       map('', '<C-a>', ':NvimTreeToggle<CR>')
     end

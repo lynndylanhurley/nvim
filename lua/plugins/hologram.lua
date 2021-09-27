@@ -1,7 +1,7 @@
 local module = {}
 
 function module.init(use)
-  use { 'tpope/vim-sleuth' }
+  use { 'edluffy/hologram.nvim' }
 end
 
 return module
