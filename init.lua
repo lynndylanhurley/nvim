@@ -46,10 +46,10 @@ return require('packer').startup(function(use)
     'surround',
     'unimpaired',
     --'ultisnips',
-    'snippy',
+    -- 'snippy',
     'wordmotion',
     'rsi', -- alt / backspace support
-    -- 'yoink', -- TODO: fix this one
+    'yoink', -- TODO: fix this one
     'wilder',
 
     -- file navigation
@@ -69,9 +69,11 @@ return require('packer').startup(function(use)
     'package_info', -- package.json helper
 
     -- lsp
+    -- 'coq',
+    'lsp',
     'trouble',
     'lsp_colors',
-    'lsp_config',
+    'cmp',
 
     -- linting / testing
     'whitespace',

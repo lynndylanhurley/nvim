@@ -1,8 +1,7 @@
 -- undo handling
-vim.bo.undofile = true
+vim.o.undofile = true
 vim.o.undodir= '~/.vim/undodir'
-vim.bo.undofile = true
-vim.bo.undolevels = 1000
+vim.o.undolevels = 1000
 vim.o.undoreload = 10000
 
 vim.o.clipboard = 'unnamed,unnamedplus'

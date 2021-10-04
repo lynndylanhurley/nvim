@@ -5,22 +5,14 @@ function module.init(use)
     'neovim/nvim-lspconfig',
     requires = {
       { 'alexaandru/nvim-lspupdate' },
-      { 'dcampos/nvim-snippy' },
-      { 'dcampos/cmp-snippy' },
-      { 'ray-x/lsp_signature.nvim' },
-      { 'hrsh7th/cmp-path' },
+      -- { 'ray-x/lsp_signature.nvim' },
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'onsails/lspkind-nvim' },
       { 'folke/lsp-colors.nvim' },
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' } ,
+      -- { 'ms-jpq/coq_nvim', branch = 'coq' },
     },
     config = function()
       local lspconfig = require('lspconfig')
-      local cmp = require('cmp')
-      local lspkind = require('lspkind')
 
       local servers = {
         'cssls',
@@ -38,6 +30,7 @@ function module.init(use)
         'vimls',
         'vuels'
       }
+      -- local coq = require "coq"
 
       -- The nvim-cmp almost supports LSP's capabilities so You should
       -- advertise it to LSP servers..
@@ -67,12 +60,12 @@ function module.init(use)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 
         -- signature help
-        require "lsp_signature".on_attach({
-          bind = true,
-          handler_opts = {
-            border = "single"
-          }
-        })
+        -- require "lsp_signature".on_attach({
+        --   bind = true,
+        --   handler_opts = {
+        --     border = "single"
+        --   }
+        -- })
       end
 
       local on_tsserver_attach = function(client, bufnr)
@@ -95,64 +88,6 @@ function module.init(use)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
       end
 
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            require 'snippy'.expand_snippet(args.body)
-          end
-        },
-
-        completion = {
-          completeopt = 'menu,menuone,noinsert',
-        },
-
-        -- You should specify your *installed* sources.
-        sources = {
-          { name = 'snippy', keyword_length = 2 },
-          { name = 'nvim_lsp' },
-          { name = 'path' },
-          { name = 'buffer' },
-        },
-
-        formatting = {
-          format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
-            return vim_item
-          end
-        },
-
-        mapping = {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-              if vim.fn['snippy#can_expand_or_advance']() then
-                return vim.fn.feedkeys(t("<Plug>(snippy-expand-or-next)"))
-              end
-
-              vim.fn.feedkeys(t("<C-n>"), "n")
-            elseif check_back_space() then
-              vim.fn.feedkeys(t("<tab>"), "n")
-            else
-              fallback()
-            end
-          end, {
-              "i",
-              "s",
-            }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn["snippy#can_jump"](-1) == 1 then
-              return vim.fn.feedkeys(t("<Plug>(snippy-previous)"))
-            elseif vim.fn.pumvisible() == 1 then
-              vim.fn.feedkeys(t("<C-p>"), "n")
-            else
-              fallback()
-            end
-          end, {
-              "i",
-              "s",
-            }),
-        },
-      }
-
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           capabilities = capabilities,
@@ -168,11 +103,11 @@ function module.init(use)
 
       -- inline diagnostics
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-          vim.lsp.diagnostic.on_publish_diagnostics, {
-              virtual_text = false,
-              underline = true,
-              signs = true,
-          }
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = false,
+          underline = true,
+          signs = true,
+        }
       )
     end
   }
