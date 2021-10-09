@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     -- typing
     'nvim_autopairs',
     'visual_multi',
-    'nvim_comment',
+    'comment',
     'repeat',
     'surround',
     'unimpaired',
@@ -70,7 +70,8 @@ return require('packer').startup(function(use)
 
     -- lsp
     -- 'coq',
-    'lsp',
+    -- 'lsp',
+    'navigator',
     'trouble',
     'lsp_colors',
     'cmp',
