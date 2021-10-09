@@ -11,7 +11,7 @@ map('', '<c-k>', '<c-w>k')
 map('', '<c-l>', '<c-w>l')
 
 -- termital split navigation
-map('t', '<esc>', '<c-\\><c-n>')
+-- map('t', '<esc>', '<c-\\><c-n>')
 map('t', '<c-h>', '<c-\\><c-n><c-w>h')
 map('t', '<c-j>', '<c-\\><c-n><c-w>j')
 map('t', '<c-k>', '<c-\\><c-n><c-w>k')
