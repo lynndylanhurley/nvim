@@ -18,13 +18,8 @@ return require('packer').startup(function(use)
     -- speed up nvim load time
     'impatient',
 
-    -- colorschemes
-    'nightfox',
-    -- 'sonokai',
-    -- 'material',
-    -- 'tokyo_night',
-    -- 'seoul256',
-    -- 'github_theme',
+    -- icons
+    -- 'circles',
 
     -- appearance
     'devicons',
@@ -32,6 +27,15 @@ return require('packer').startup(function(use)
     -- 'galaxyline',
     -- 'feline',
     'indent_blankline',
+
+    -- colorschemes
+    -- 'nightfox',
+    -- 'sonokai',
+    -- 'material',
+    -- 'tokyo_night',
+    -- 'seoul256',
+    -- 'github_theme',
+    'onedark',
     'lualine',
 
     -- syntax
@@ -41,12 +45,13 @@ return require('packer').startup(function(use)
     -- typing
     'nvim_autopairs',
     'visual_multi',
-    'comment',
+    -- 'comment',
+    'nvim_comment',
     'repeat',
     'surround',
     'unimpaired',
     --'ultisnips',
-    -- 'snippy',
+    'snippy',
     'wordmotion',
     'rsi', -- alt / backspace support
     'yoink', -- TODO: fix this one
@@ -70,11 +75,11 @@ return require('packer').startup(function(use)
 
     -- lsp
     -- 'coq',
-    -- 'lsp',
-    'navigator',
     'trouble',
     'lsp_colors',
     'cmp',
+    'navigator',
+    -- 'lsp',
 
     -- linting / testing
     'whitespace',
@@ -94,7 +99,7 @@ return require('packer').startup(function(use)
     'gitsigns',
     'fugitive',
     -- 'flog',
-    'gv'
+    'gv',
   }
 
   for i, name in ipairs(configs) do

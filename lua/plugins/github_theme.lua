@@ -5,7 +5,8 @@ function module.init(use)
     'projekt0n/github-nvim-theme',
     config = function()
       require('github-theme').setup {
-        theme_style = "dark"
+        theme_style = "dimmed",
+        dark_sidebar = true,
       }
     end
   }

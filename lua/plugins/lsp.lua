@@ -70,7 +70,6 @@ function module.init(use)
 
       local on_tsserver_attach = function(client, bufnr)
         local ts_utils = require("nvim-lsp-ts-utils")
-        client.resolved_capabilities.document_range_formatting = false
         on_attach(client, bufnr)
 
         ts_utils.setup {
