@@ -2,10 +2,9 @@ local module = {}
 
 function module.init(use)
   use {
-    'sainnhe/sonokai',
+    "martinsione/darkplus.nvim",
     config = function()
-      vim.g.sonokai_style = 'shusia'
-      vim.cmd('colorscheme sonokai')
+      vim.cmd[[colorscheme darkplus]]
     end
   }
 end

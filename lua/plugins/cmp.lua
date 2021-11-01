@@ -13,6 +13,7 @@ function module.init(use)
       { 'honza/vim-snippets' },
       { 'dcampos/cmp-snippy' },
       { 'honza/vim-snippets' },
+      { 'ray-x/navigator.lua' },
     },
     config = function()
       local cmp = require('cmp')

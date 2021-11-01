@@ -20,9 +20,25 @@ function module.init(use)
           client.resolved_capabilities.document_range_formatting = false
         end,
 
+        -- full list here:
+        -- https://github.com/ray-x/navigator.lua/blob/062e7e4ffca22de53c7c304c66a92763d4d30293/lua/navigator/lspclient/mapping.lua
+        default_mapping = false,
+
         keymaps = {
+          { key = "gr", func = "require('navigator.reference').reference()" },
+          { key = "gD", func = "declaration({ border = 'rounded', max_width = 80 })" },
           { key = "gd", func = "definition()" },
           { key = "ga", func = "code_action()" },
+          { key = "K", func = "hover({ popup_opts = { border = single, max_width = 80 }})" },
+          { key = "gi", func = "implementation()" },
+          { key = "<leader>d", func = "type_definition()" },
+          { key = "gL", func = "require('navigator.diagnostics').show_diagnostics()" },
+          { key = "gG", func = "require('navigator.diagnostics').show_buf_diagnostics()" },
+          { key = "]d", func = "diagnostic.goto_next({ border = 'rounded', max_width = 80})" },
+          { key = "[d", func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})" },
+          { key = "]r", func = "require('navigator.treesitter').goto_next_usage()" },
+          { key = "[r", func = "require('navigator.treesitter').goto_previous_usage()" },
+          { key = '<leader>f', func = 'formatting()', mode='n' },
         },
 
         icons = {

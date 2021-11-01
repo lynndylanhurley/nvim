@@ -2,12 +2,12 @@ local module = {}
 
 function module.init(use)
   use {
-    'sainnhe/sonokai',
+    'shaunsingh/nord.nvim',
     config = function()
-      vim.g.sonokai_style = 'shusia'
-      vim.cmd('colorscheme sonokai')
+      vim.cmd[[colorscheme nord]]
     end
   }
 end
 
 return module
+

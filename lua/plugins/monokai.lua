@@ -2,12 +2,13 @@ local module = {}
 
 function module.init(use)
   use {
-    'sainnhe/sonokai',
+    'tanvirtin/monokai.nvim',
+    requires = "rktjmp/lush.nvim",
     config = function()
-      vim.g.sonokai_style = 'shusia'
-      vim.cmd('colorscheme sonokai')
+      vim.cmd[[colorscheme monokai_soda]]
     end
   }
 end
 
 return module
+

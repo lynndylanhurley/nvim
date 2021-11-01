@@ -8,6 +8,9 @@ vim.o.clipboard = 'unnamed,unnamedplus'
 
 vim.o.backspace = 'indent,eol,start'
 
+-- true color support
+vim.o.termguicolors = true
+
 -- automatically read changes in files from outside of vim (git pull, etc.)
 vim.o.autoread = true
 

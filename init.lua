@@ -31,11 +31,16 @@ return require('packer').startup(function(use)
     -- colorschemes
     -- 'nightfox',
     -- 'sonokai',
+    -- 'nord',
     -- 'material',
     -- 'tokyo_night',
     -- 'seoul256',
     -- 'github_theme',
-    'onedark',
+    -- 'lighthaus',
+    -- 'onedark',
+    -- 'zenbones',
+    'darkplus',
+    -- 'monokai',
     'lualine',
 
     -- syntax
@@ -54,7 +59,7 @@ return require('packer').startup(function(use)
     'snippy',
     'wordmotion',
     'rsi', -- alt / backspace support
-    'yoink', -- TODO: fix this one
+    'yoink',
     'wilder',
 
     -- file navigation
