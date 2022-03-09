@@ -41,3 +41,5 @@ luac.out
 
 # packer
 packer_compiled.lua
+
+undo/

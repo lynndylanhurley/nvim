@@ -1,8 +1,10 @@
 -- undo handling
-vim.o.undofile = true
-vim.o.undodir= '~/.vim/undodir'
-vim.o.undolevels = 1000
-vim.o.undoreload = 10000
+vim.opt.undofile = true
+vim.opt.undodir= vim.fn.stdpath('config') .. '/undo'
+vim.opt.undolevels = 1000
+vim.opt.undoreload = 10000
+
+-- testing undo
 
 vim.o.clipboard = 'unnamed,unnamedplus'
 

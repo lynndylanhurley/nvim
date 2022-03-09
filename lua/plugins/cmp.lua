@@ -4,7 +4,6 @@ function module.init(use)
   use {
     'hrsh7th/nvim-cmp',
     requires = {
-      { 'dcampos/nvim-snippy' },
       { 'hrsh7th/cmp-path' },
       { 'onsails/lspkind-nvim' },
       { 'hrsh7th/cmp-nvim-lsp' },
@@ -12,13 +11,35 @@ function module.init(use)
       { 'hrsh7th/cmp-nvim-lua' },
       { 'honza/vim-snippets' },
       { 'dcampos/cmp-snippy' },
+      { 'dcampos/nvim-snippy' },
       { 'honza/vim-snippets' },
-      { 'ray-x/navigator.lua' },
+      -- { 'ray-x/navigator.lua' },
+      { 'windwp/nvim-autopairs' },
     },
     config = function()
       local cmp = require('cmp')
+      local snippy = require("snippy")
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local lspkind = require('lspkind')
       lspkind.init()
+
+      require('nvim-autopairs').setup({
+        disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
+      })
+
+      snippy.setup({
+        mappings = {
+          is = {
+            ["<Tab>"] = "expand_or_advance",
+            ["<S-Tab>"] = "previous",
+          },
+          nx = {
+            ["<leader>x"] = "cut_text",
+          },
+        },
+      })
+
+      cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
       cmp.setup {
         snippet = {
@@ -64,7 +85,8 @@ function module.init(use)
             else
               fallback()
             end
-          end, {"i", "s"})
+          end, {"i", "s"}),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }
       }
     end

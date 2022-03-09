@@ -4,21 +4,23 @@ function module.init(use)
   use {
     'ray-x/navigator.lua',
     requires = {
-      {'alexaandru/nvim-lspupdate'},
-      {'neovim/nvim-lspconfig'},
+      { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
+      { 'neovim/nvim-lspconfig' },
       { 'hrsh7th/cmp-nvim-lsp' },
-      {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}
+      { 'alexaandru/nvim-lspupdate' },
+      { 'williamboman/nvim-lsp-installer'},
+      { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
     },
     config = function()
-      local cfg = {
-        lsp = {
-          diagnostic_virtual_text = false
-        },
+      local lsp_installer = require('nvim-lsp-installer')
 
-        on_attach = function(client, bufn)
-          client.resolved_capabilities.document_formatting = false
-          client.resolved_capabilities.document_range_formatting = false
-        end,
+      local cfg = {
+        -- debug = true,
+
+        -- on_attach = function(client, bufn)
+          -- client.resolved_capabilities.document_formatting = false
+          -- client.resolved_capabilities.document_range_formatting = false
+        -- end,
 
         -- full list here:
         -- https://github.com/ray-x/navigator.lua/blob/062e7e4ffca22de53c7c304c66a92763d4d30293/lua/navigator/lspclient/mapping.lua
@@ -27,9 +29,9 @@ function module.init(use)
         keymaps = {
           { key = "gr", func = "require('navigator.reference').reference()" },
           { key = "gD", func = "declaration({ border = 'rounded', max_width = 80 })" },
-          { key = "gd", func = "definition()" },
+          { key = 'gd', func = "require('navigator.definition').definition()" },
           { key = "ga", func = "code_action()" },
-          { key = "K", func = "hover({ popup_opts = { border = single, max_width = 80 }})" },
+          { key = 'K', func = "hover({ popup_opts = { border = single, max_width = 80 }})" },
           { key = "gi", func = "implementation()" },
           { key = "<leader>d", func = "type_definition()" },
           { key = "gL", func = "require('navigator.diagnostics').show_diagnostics()" },
@@ -60,7 +62,67 @@ function module.init(use)
           diagnostic_virtual_text = "│",
           diagnostic_file = "│",
         },
+
+        lsp_installer = true,
       }
+
+      local enhance_server_opts = {
+        ['sumneko_lua'] = function(options)
+          options.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+
+            require('navigator.lspclient.mapping').setup({
+              client = client,
+              bufnr = bufnr,
+              cap = capabilities,
+            })
+          end
+
+          options.settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' },
+              },
+            },
+          }
+        end,
+        ['tsserver'] = function(options)
+          options.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+
+            local ts_utils = require("nvim-lsp-ts-utils")
+            ts_utils.setup({})
+            ts_utils.setup_client(client)
+
+            -- no default maps, so you may want to define some here
+            local opts = { silent = true }
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+
+
+            require('navigator.lspclient.mapping').setup({
+              client = client,
+              bufnr = bufnr,
+              cap = capabilities,
+            })
+          end
+        end,
+      }
+
+      lsp_installer.on_server_ready(function(server)
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+        local options = {}
+
+        if enhance_server_opts[server.name] then
+          enhance_server_opts[server.name](options)
+        end
+
+        server:setup({
+          capabilities = capabilities
+        })
+      end)
 
       require'navigator'.setup(cfg)
     end

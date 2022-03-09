@@ -10,14 +10,13 @@ function module.init(use)
     config = function()
       local null_ls = require("null-ls")
 
-      null_ls.config({
-        debug = false,
+      null_ls.setup({
+        debug = true,
         sources = {
           -- actions
           -- null_ls.builtins.code_actions.gitsigns,
 
           -- formatting
-          null_ls.builtins.formatting.eslint_d,
           null_ls.builtins.formatting.json_tool,
           null_ls.builtins.formatting.lua_format,
           null_ls.builtins.formatting.nginx_beautifier,
@@ -26,15 +25,17 @@ function module.init(use)
           null_ls.builtins.formatting.rubocop,
           null_ls.builtins.formatting.sqlformat,
           null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.eslint_d.with({
+            prefer_local = "node_modules/.bin"
+          }),
 
           -- diagnostics
-          -- null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.eslint_d,
+          -- null_ls.builtins.diagnostics.eslint_d.with({
+          --   prefer_local = "node_modules/.bin"
+          -- }),
           null_ls.builtins.diagnostics.luacheck,
         }
       })
-
-      require("lspconfig")["null-ls"].setup {}
 
       map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting_sync()<cr>')
     end

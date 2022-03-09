@@ -10,7 +10,7 @@ require('utils')
 require('settings')
 require('keymaps')
 
-return require('packer').startup(function(use)
+return require('packer').startup({function(use)
   -- packer self-update
   use { 'wbthomason/packer.nvim' }
 
@@ -48,7 +48,7 @@ return require('packer').startup(function(use)
     'vim_sleuth',
 
     -- typing
-    'nvim_autopairs',
+    -- 'nvim_autopairs',
     'visual_multi',
     -- 'comment',
     'nvim_comment',
@@ -56,7 +56,7 @@ return require('packer').startup(function(use)
     'surround',
     'unimpaired',
     --'ultisnips',
-    'snippy',
+    -- 'snippy',
     'wordmotion',
     'rsi', -- alt / backspace support
     'yoink',
@@ -76,7 +76,8 @@ return require('packer').startup(function(use)
     'which_key',
 
     -- language specific
-    'package_info', -- package.json helper
+    -- 'package_info', -- package.json helper
+    'vim_package_info', -- package.json helper
 
     -- lsp
     -- 'coq',
@@ -99,12 +100,19 @@ return require('packer').startup(function(use)
     -- 'floaterm',
     'fterm',
     'hologram',
+    'undotree',
 
     -- git
-    'gitsigns',
+    -- 'gitsigns',
     'fugitive',
     -- 'flog',
     'gv',
+
+    -- debuggers
+    'dap',
+
+    -- project
+    'neorg'
   }
 
   for i, name in ipairs(configs) do
@@ -113,4 +121,11 @@ return require('packer').startup(function(use)
 
   -- auto compile packer when config is changed
   vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
-end)
+end,
+config = {
+  git = {
+    subcommands = {
+      update = 'pull --ff-only --progress --rebase=false'
+    }
+  }
+}})
