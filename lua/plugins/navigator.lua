@@ -17,14 +17,9 @@ function module.init(use)
       local cfg = {
         -- debug = true,
 
-        -- on_attach = function(client, bufn)
-          -- client.resolved_capabilities.document_formatting = false
-          -- client.resolved_capabilities.document_range_formatting = false
-        -- end,
-
         -- full list here:
         -- https://github.com/ray-x/navigator.lua/blob/062e7e4ffca22de53c7c304c66a92763d4d30293/lua/navigator/lspclient/mapping.lua
-        default_mapping = false,
+        default_mapping = true,
 
         keymaps = {
           { key = "gr", func = "require('navigator.reference').reference()" },
@@ -68,16 +63,6 @@ function module.init(use)
 
       local enhance_server_opts = {
         ['sumneko_lua'] = function(options)
-          options.on_attach = function(client, bufnr)
-            client.resolved_capabilities.document_formatting = false
-
-            require('navigator.lspclient.mapping').setup({
-              client = client,
-              bufnr = bufnr,
-              cap = capabilities,
-            })
-          end
-
           options.settings = {
             Lua = {
               diagnostics = {
@@ -88,8 +73,6 @@ function module.init(use)
         end,
         ['tsserver'] = function(options)
           options.on_attach = function(client, bufnr)
-            client.resolved_capabilities.document_formatting = false
-
             local ts_utils = require("nvim-lsp-ts-utils")
             ts_utils.setup({})
             ts_utils.setup_client(client)
@@ -100,28 +83,57 @@ function module.init(use)
             -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
             vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
 
-
-            require('navigator.lspclient.mapping').setup({
-              client = client,
-              bufnr = bufnr,
-              cap = capabilities,
-            })
           end
         end,
+
+        ['eslint'] = function(options)
+          options.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = true
+          end
+          options.settings = {
+            format = { enable = true }, -- this will enable formatting
+          }
+        end
       }
 
-      lsp_installer.on_server_ready(function(server)
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+      -- global on_attach
+      local on_attach_base = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      local enhance_global_opts = function(server, options)
         local options = {}
 
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        options.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+        -- server specific configs
         if enhance_server_opts[server.name] then
           enhance_server_opts[server.name](options)
         end
 
-        server:setup({
-          capabilities = capabilities
-        })
+        -- prepend global config options
+        local server_on_attach = options.on_attach
+        options.on_attach = function(client, bufnr)
+          on_attach_base(client, bufnnr)
+
+          require('navigator.lspclient.mapping').setup({
+            client = client,
+            bufnr = bufnr,
+            cap = capabilities,
+          })
+
+          if (server_on_attach) then
+            server_on_attach(client, bufnr)
+          end
+        end
+
+        return options
+      end
+
+      lsp_installer.on_server_ready(function(server)
+        server:setup(enhance_global_opts(server, options))
       end)
 
       require'navigator'.setup(cfg)

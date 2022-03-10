@@ -109,7 +109,7 @@ return require('packer').startup({function(use)
     'gv',
 
     -- debuggers
-    'dap',
+    -- 'dap',
 
     -- project
     'neorg'

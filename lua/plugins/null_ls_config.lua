@@ -25,9 +25,9 @@ function module.init(use)
           null_ls.builtins.formatting.rubocop,
           null_ls.builtins.formatting.sqlformat,
           null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.formatting.eslint_d.with({
-            prefer_local = "node_modules/.bin"
-          }),
+          -- null_ls.builtins.formatting.eslint_d.with({
+          --   prefer_local = "node_modules/.bin"
+          -- }),
 
           -- diagnostics
           -- null_ls.builtins.diagnostics.eslint_d.with({
