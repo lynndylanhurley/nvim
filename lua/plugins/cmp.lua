@@ -3,11 +3,12 @@ local module = {}
 function module.init(use)
   use {
     'hrsh7th/nvim-cmp',
+    -- event = "InsertEnter", -- lazy load
     requires = {
       { 'hrsh7th/cmp-path' },
-      { 'onsails/lspkind-nvim' },
+      -- { 'onsails/lspkind-nvim' },
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-buffer' },
+      -- { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-nvim-lua' },
       { 'honza/vim-snippets' },
       { 'dcampos/cmp-snippy' },
@@ -20,8 +21,8 @@ function module.init(use)
       local cmp = require('cmp')
       local snippy = require("snippy")
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local lspkind = require('lspkind')
-      lspkind.init()
+      -- local lspkind = require('lspkind')
+      -- lspkind.setup()
 
       require('nvim-autopairs').setup({
         disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
@@ -39,7 +40,7 @@ function module.init(use)
         },
       })
 
-      cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+      -- cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
       cmp.setup {
         snippet = {
@@ -48,21 +49,23 @@ function module.init(use)
           end
         },
 
-        completion = {completeopt = 'menu,menuone,noinsert'},
+        -- completion = {completeopt = 'menu,menuone,noinsert'},
 
         -- You should specify your *installed* sources.
         sources = {
           {name = 'snippy', keyword_length = 2},
           {name = 'nvim_lsp', keyword_length = 2},
           {name = 'path'},
-          {name = 'buffer'}
+          -- {name = 'buffer'}
         },
 
-        formatting = {
-          format = lspkind.cmp_format(),
-        },
+        -- formatting = {
+        --   format = lspkind.cmp_format(),
+        -- },
+      }
 
-        mapping = {
+      cmp.setup.cmdline {
+        mapping = cmp.mapping.preset.cmdline({
           ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.pumvisible() == 1 then
               if vim.fn['snippy#can_expand_or_advance']() then
@@ -87,7 +90,7 @@ function module.init(use)
             end
           end, {"i", "s"}),
           ['<CR>'] = cmp.mapping.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        }
+        })
       }
     end
   }

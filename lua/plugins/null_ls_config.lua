@@ -37,7 +37,7 @@ function module.init(use)
         }
       })
 
-      map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting_sync()<cr>')
+      map('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>')
     end
   }
 end

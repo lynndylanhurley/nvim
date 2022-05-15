@@ -23,10 +23,10 @@ return require('packer').startup({function(use)
 
     -- appearance
     'devicons',
-    'hexokinase',
+    -- 'hexokinase',
     -- 'galaxyline',
     -- 'feline',
-    'indent_blankline',
+    -- 'indent_blankline',
 
     -- colorschemes
     -- 'nightfox',
@@ -103,7 +103,7 @@ return require('packer').startup({function(use)
     'undotree',
 
     -- git
-    -- 'gitsigns',
+    'gitsigns',
     'fugitive',
     -- 'flog',
     'gv',

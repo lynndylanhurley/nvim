@@ -3,6 +3,7 @@ local module = {}
 function module.init(use)
   use {
     'ray-x/navigator.lua',
+    event = "InsertEnter", -- lazy load
     requires = {
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       { 'neovim/nvim-lspconfig' },
@@ -12,14 +13,91 @@ function module.init(use)
       { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
     },
     config = function()
+      local lspconfig = require('lspconfig')
       local lsp_installer = require('nvim-lsp-installer')
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local enhance_server_opts = {
+        ['sumneko_lua'] = function(options)
+          options.settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' },
+              },
+            },
+          }
+        end,
 
-      local cfg = {
-        -- debug = true,
+        ['tsserver'] = function(options)
+          options.on_attach = function(client, bufnr)
+            local ts_utils = require("nvim-lsp-ts-utils")
+            ts_utils.setup({})
+            ts_utils.setup_client(client)
+
+            -- no default maps, so you may want to define some here
+            local opts = { silent = true }
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+          end
+        end,
+
+        ['eslint'] = function(options)
+          options.settings = {
+            format = { enable = true }, -- this will enable formatting
+          }
+
+          options.on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+            client.server_capabilities.documentRangeFormattingProvider = true
+          end
+        end
+      }
+
+      -- need to init lsp installer before interacting with it
+      lsp_installer.setup{}
+
+      function global_on_attach(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end
+
+      -- loop through installed servers, enhance if defined in above map
+      for _, server in ipairs(lsp_installer.get_installed_servers()) do
+        local capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+        local options = {
+          capabilities = capabilities
+        }
+
+        if enhance_server_opts[server.name] then
+          enhance_server_opts[server.name](options)
+        end
+
+        local server_on_attach = options.on_attach
+
+        options.on_attach = function(client, bufnr)
+          global_on_attach(client, bufnr)
+
+          require('navigator.lspclient.mapping').setup({
+            client = client,
+            bufnr = bufnr,
+            cap = capabilities
+          })
+
+          if server_on_attach then
+            server_on_attach(client, bufnr)
+          end
+        end
+
+        lspconfig[server.name].setup(options)
+      end
+
+      require'navigator'.setup({
+        debug = true,
 
         -- full list here:
         -- https://github.com/ray-x/navigator.lua/blob/062e7e4ffca22de53c7c304c66a92763d4d30293/lua/navigator/lspclient/mapping.lua
-        default_mapping = true,
+        default_mapping = false,
 
         keymaps = {
           { key = "gr", func = "require('navigator.reference').reference()" },
@@ -35,7 +113,8 @@ function module.init(use)
           { key = "[d", func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})" },
           { key = "]r", func = "require('navigator.treesitter').goto_next_usage()" },
           { key = "[r", func = "require('navigator.treesitter').goto_previous_usage()" },
-          { key = '<leader>f', func = 'formatting()', mode='n' },
+          -- { key = '<leader>f', func = 'formatting()', mode='n' },
+          -- { key = '<leader>f', func = 'range_formatting()', mode='v' },
         },
 
         icons = {
@@ -59,84 +138,7 @@ function module.init(use)
         },
 
         lsp_installer = true,
-      }
-
-      local enhance_server_opts = {
-        ['sumneko_lua'] = function(options)
-          options.settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' },
-              },
-            },
-          }
-        end,
-        ['tsserver'] = function(options)
-          options.on_attach = function(client, bufnr)
-            local ts_utils = require("nvim-lsp-ts-utils")
-            ts_utils.setup({})
-            ts_utils.setup_client(client)
-
-            -- no default maps, so you may want to define some here
-            local opts = { silent = true }
-            vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-            vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
-
-          end
-        end,
-
-        ['eslint'] = function(options)
-          options.on_attach = function(client, bufnr)
-            client.resolved_capabilities.document_formatting = true
-          end
-          options.settings = {
-            format = { enable = true }, -- this will enable formatting
-          }
-        end
-      }
-
-      -- global on_attach
-      local on_attach_base = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-      end
-
-      local enhance_global_opts = function(server, options)
-        local options = {}
-
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        options.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
-        -- server specific configs
-        if enhance_server_opts[server.name] then
-          enhance_server_opts[server.name](options)
-        end
-
-        -- prepend global config options
-        local server_on_attach = options.on_attach
-        options.on_attach = function(client, bufnr)
-          on_attach_base(client, bufnnr)
-
-          require('navigator.lspclient.mapping').setup({
-            client = client,
-            bufnr = bufnr,
-            cap = capabilities,
-          })
-
-          if (server_on_attach) then
-            server_on_attach(client, bufnr)
-          end
-        end
-
-        return options
-      end
-
-      lsp_installer.on_server_ready(function(server)
-        server:setup(enhance_global_opts(server, options))
-      end)
-
-      require'navigator'.setup(cfg)
+      })
     end
   }
 end

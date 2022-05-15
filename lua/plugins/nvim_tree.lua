@@ -7,8 +7,6 @@ function module.init(use)
     config = function()
       require'nvim-tree'.setup {
         open_on_setup = false,
-        auto_close = false,
-        ignore_list = { '.DS_Store' },
         git = {
           ignore = false
         },
