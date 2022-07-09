@@ -45,7 +45,8 @@ return require('packer').startup({function(use)
 
     -- syntax
     'treesitter',
-    'vim_sleuth',
+    -- 'vim_sleuth',
+    'indent_o_matic',
 
     -- typing
     -- 'nvim_autopairs',
@@ -59,7 +60,7 @@ return require('packer').startup({function(use)
     -- 'snippy',
     'wordmotion',
     'rsi', -- alt / backspace support
-    'yoink',
+    -- 'yoink',
     'wilder',
 
     -- file navigation
@@ -81,7 +82,8 @@ return require('packer').startup({function(use)
 
     -- lsp
     -- 'coq',
-    'trouble',
+    -- 'trouble',
+    'diagnostic_window',
     'lsp_colors',
     'cmp',
     'navigator',

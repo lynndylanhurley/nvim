@@ -3,28 +3,36 @@ local module = {}
 function module.init(use)
   use {
     'ray-x/navigator.lua',
-    event = "InsertEnter", -- lazy load
     requires = {
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       { 'neovim/nvim-lspconfig' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'alexaandru/nvim-lspupdate' },
-      { 'williamboman/nvim-lsp-installer'},
+      { 'williamboman/nvim-lsp-installer' },
       { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+      { 'glepnir/lspsaga.nvim'}
     },
     config = function()
       local lspconfig = require('lspconfig')
       local lsp_installer = require('nvim-lsp-installer')
       local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local saga = require('lspsaga')
+
+      saga.init_lsp_saga()
+
       local enhance_server_opts = {
         ['sumneko_lua'] = function(options)
           options.settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' },
-              },
-            },
+            format = { enable = true }, -- this will enable formatting
+            Lua = { diagnostics = { globals = { 'vim' } } }
           }
+
+          -- prefer lsp formatting
+          options.on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+            client.server_capabilities
+                .documentRangeFormattingProvider = true
+          end
         end,
 
         ['tsserver'] = function(options)
@@ -35,26 +43,34 @@ function module.init(use)
 
             -- no default maps, so you may want to define some here
             local opts = { silent = true }
-            vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gs",
+              ":TSLspOrganize<CR>", opts)
             -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-            vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "gi",
+              ":TSLspImportAll<CR>", opts)
           end
         end,
 
         ['eslint'] = function(options)
           options.settings = {
-            format = { enable = true }, -- this will enable formatting
+            format = { enable = true } -- this will enable formatting
+          }
+
+          options.filetypes = {
+            'javascript', 'javascriptreact', 'javascript.jsx',
+            'typescript', 'typescriptreact', 'typescript.tsx', 'vue'
           }
 
           options.on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true
-            client.server_capabilities.documentRangeFormattingProvider = true
+            client.server_capabilities
+                .documentRangeFormattingProvider = true
           end
         end
       }
 
       -- need to init lsp installer before interacting with it
-      lsp_installer.setup{}
+      lsp_installer.setup {}
 
       function global_on_attach(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
@@ -63,11 +79,10 @@ function module.init(use)
 
       -- loop through installed servers, enhance if defined in above map
       for _, server in ipairs(lsp_installer.get_installed_servers()) do
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+        local server_capabilities =
+        require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-        local options = {
-          capabilities = capabilities
-        }
+        local options = { capabilities = server_capabilities }
 
         if enhance_server_opts[server.name] then
           enhance_server_opts[server.name](options)
@@ -81,7 +96,7 @@ function module.init(use)
           require('navigator.lspclient.mapping').setup({
             client = client,
             bufnr = bufnr,
-            cap = capabilities
+            cap = server_capabilities
           })
 
           if server_on_attach then
@@ -92,27 +107,75 @@ function module.init(use)
         lspconfig[server.name].setup(options)
       end
 
-      require'navigator'.setup({
-        debug = true,
+      require 'navigator'.setup({
+        debug = false,
 
         -- full list here:
         -- https://github.com/ray-x/navigator.lua/blob/062e7e4ffca22de53c7c304c66a92763d4d30293/lua/navigator/lspclient/mapping.lua
         default_mapping = false,
 
         keymaps = {
-          { key = "gr", func = "require('navigator.reference').reference()" },
-          { key = "gD", func = "declaration({ border = 'rounded', max_width = 80 })" },
-          { key = 'gd', func = "require('navigator.definition').definition()" },
-          { key = "ga", func = "code_action()" },
-          { key = 'K', func = "hover({ popup_opts = { border = single, max_width = 80 }})" },
-          { key = "gi", func = "implementation()" },
-          { key = "<leader>d", func = "type_definition()" },
-          { key = "gL", func = "require('navigator.diagnostics').show_diagnostics()" },
-          { key = "gG", func = "require('navigator.diagnostics').show_buf_diagnostics()" },
-          { key = "]d", func = "diagnostic.goto_next({ border = 'rounded', max_width = 80})" },
-          { key = "[d", func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})" },
-          { key = "]r", func = "require('navigator.treesitter').goto_next_usage()" },
-          { key = "[r", func = "require('navigator.treesitter').goto_previous_usage()" },
+          {
+            key = "gr",
+            func = require('navigator.reference').async_ref,
+            desc = 'async_ref'
+          },
+          {
+            key = "gd",
+            func = require('lspsaga.definition').preview_definition,
+            desc = 'preview_definition'
+          }, {
+            key = 'gD',
+            func = require('navigator.definition').definition,
+            desc = 'definition'
+          },
+          {
+            key = "ga",
+            func = require('lspsaga.codeaction').code_action,
+            desc = 'code_action'
+          }, {
+            key = 'K',
+            func = require('lspsaga.hover').render_hover_doc,
+            desc = 'hover'
+          }, {
+            key = "gi",
+            func = vim.lsp.buf.implementation,
+            desc = 'implementation'
+          }, {
+            key = "<leader>d",
+            func = vim.lsp.buf.type_definition,
+            desc = 'type_definition'
+          }, {
+            key = 'gh',
+            func = require('lspsaga.signaturehelp').signature_help,
+            desc = 'signature_help'
+          }, {
+            key = "gL",
+            func = require('navigator.diagnostics').show_diagnostics,
+            desc = 'show_diagnostics'
+          }, {
+            key = "gG",
+            func = require('navigator.diagnostics').show_buf_diagnostics,
+            desc = 'show_buf_diagnostics'
+          }, {
+            key = "]d",
+            func = vim.diagnostic.goto_next,
+            desc = 'goto_next'
+          }, {
+            key = "[d",
+            func = vim.diagnostic.goto_prev,
+            desc = 'goto_prev'
+          },
+          {
+            key = "]r",
+            func = require('navigator.treesitter').goto_next_usage,
+            desc = 'goto_next_usage'
+          },
+          {
+            key = "[r",
+            func = require('navigator.treesitter').goto_previous_usage,
+            desc = 'goto_previous_usage'
+          }
           -- { key = '<leader>f', func = 'formatting()', mode='n' },
           -- { key = '<leader>f', func = 'range_formatting()', mode='v' },
         },
@@ -134,10 +197,12 @@ function module.init(use)
           diagnostic_head_severity_3 = "│",
           diagnostic_head_description = "│",
           diagnostic_virtual_text = "│",
-          diagnostic_file = "│",
+          diagnostic_file = "│"
         },
 
         lsp_installer = true,
+
+        lsp = { format_on_save = false }
       })
     end
   }

@@ -48,10 +48,11 @@ vim.wo.number = true
 vim.wo.wrap = true
 vim.wo.linebreak = true
 
-vim.bo.tabstop = 2
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.smartindent = true
 
 -- enable mouse interaction
 vim.o.mouse = 'a'

@@ -15,8 +15,8 @@ function module.init(use)
         auto_close = true,
       })
       local opts = { noremap = true, silent = true }
-      map('n', '<leader><space>', '<cmd>lua require("Fterm").toggle()<cr>', opts)
-      map('t', '<leader><space>', '<c-\\><c-n><cmd>lua require("FTerm").close()<cr>', opts)
+      map('n', '<c-space>', '<cmd>lua require("Fterm").toggle()<cr>', opts)
+      map('t', '<c-space>', '<c-\\><c-n><cmd>lua require("FTerm").close()<cr>', opts)
     end
   }
 end
