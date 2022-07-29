@@ -1,12 +1,14 @@
 local module = {}
 
 function module.init(use)
-  use {
-    'tpope/vim-surround',
+  use({
+    "kylechui/nvim-surround",
     config = function()
-      vim.g.surround_indent = 1
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
-  }
+  })
 end
 
 return module

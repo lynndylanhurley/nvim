@@ -117,8 +117,8 @@ function module.init(use)
         keymaps = {
           {
             key = "gr",
-            func = require('navigator.reference').async_ref,
-            desc = 'async_ref'
+            func = require("lspsaga.finder").lsp_finder,
+            desc = 'lsp_finder'
           },
           {
             key = "gd",

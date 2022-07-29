@@ -64,7 +64,8 @@ return require('packer').startup({function(use)
     'wilder',
 
     -- file navigation
-    'nvim_tree',
+    -- 'nvim_tree',
+    'neo_tree',
     'fzf',
     -- 'telescope',
 
