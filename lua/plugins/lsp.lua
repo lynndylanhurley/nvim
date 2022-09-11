@@ -9,7 +9,7 @@ function module.init(use)
       "neovim/nvim-lspconfig",
       "glepnir/lspsaga.nvim",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
-      { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- cmp (autocompletion)
       'hrsh7th/cmp-nvim-lsp',
@@ -25,7 +25,6 @@ function module.init(use)
       'dcampos/cmp-snippy',
       'dcampos/nvim-snippy',
       'honza/vim-snippets',
-      'windwp/nvim-autopairs',
 
       -- null-ls (linting + formatting)
       {
@@ -34,7 +33,7 @@ function module.init(use)
           { 'nvim-lua/plenary.nvim' },
         },
       },
-      { "jayp0521/mason-null-ls.nvim" }
+      "jayp0521/mason-null-ls.nvim"
     },
     config = function()
       local keymap = vim.keymap.set
