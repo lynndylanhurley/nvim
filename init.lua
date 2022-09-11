@@ -39,7 +39,8 @@ return require('packer').startup({function(use)
     -- 'lighthaus',
     -- 'onedark',
     -- 'zenbones',
-    'darkplus',
+    -- 'darkplus',
+    'tundra',
     -- 'monokai',
     'lualine',
 
@@ -64,15 +65,15 @@ return require('packer').startup({function(use)
     'wilder',
 
     -- file navigation
-    -- 'nvim_tree',
-    'neo_tree',
+    'nvim_tree',
+    -- 'neo_tree',
     'fzf',
     -- 'telescope',
 
     -- buffer navigation
     'lightspeed',
     'bfq',
-    'slash',
+    -- 'slash',
 
     -- help
     'which_key',
@@ -84,16 +85,16 @@ return require('packer').startup({function(use)
     -- lsp
     -- 'coq',
     -- 'trouble',
-    'diagnostic_window',
+    -- 'diagnostic_window',
     'lsp_colors',
-    'cmp',
-    'navigator',
-    -- 'lsp',
+    -- 'cmp',
+    -- 'navigator',
+    'lsp',
 
     -- linting / testing
     'whitespace',
     'vim_test',
-    'null_ls_config',
+    -- 'null_ls_config',
 
     -- fun
     -- 'dashboard',
@@ -115,7 +116,7 @@ return require('packer').startup({function(use)
     -- 'dap',
 
     -- project
-    'neorg'
+    -- 'neorg'
   }
 
   for i, name in ipairs(configs) do

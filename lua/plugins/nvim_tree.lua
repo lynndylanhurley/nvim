@@ -16,13 +16,16 @@ function module.init(use)
               { key = "o", cb = ":lua NvimTreeOSOpen()<cr>" }
             }
           }
+        },
+        renderer = {
+          icons = {
+            show = {
+              git = false,
+              folder = true,
+              file = true,
+            }
+          }
         }
-      }
-
-      vim.g.nvim_tree_show_icons = {
-        git = 0,
-        folders = 1,
-        files = 1,
       }
 
       local tree_cb = require'nvim-tree.config'.nvim_tree_callback

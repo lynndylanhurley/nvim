@@ -10,13 +10,20 @@ function module.init(use)
       { 'alexaandru/nvim-lspupdate' },
       { 'williamboman/nvim-lsp-installer' },
       { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-      { 'glepnir/lspsaga.nvim'}
+      { 'glepnir/lspsaga.nvim'},
+      -- { 'SmiteshP/nvim-navic' }
     },
     config = function()
       local lspconfig = require('lspconfig')
       local lsp_installer = require('nvim-lsp-installer')
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local saga = require('lspsaga')
+      local finder = require('lspsaga.finder')
+      -- local navic = require("nvim-navic")
+
+      lsp_finder = function()
+        finder:lsp_finder()
+      end
 
       saga.init_lsp_saga()
 
@@ -75,6 +82,7 @@ function module.init(use)
       function global_on_attach(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
+        -- navic.attach(client, bufnr)
       end
 
       -- loop through installed servers, enhance if defined in above map
@@ -117,12 +125,12 @@ function module.init(use)
         keymaps = {
           {
             key = "gr",
-            func = require("lspsaga.finder").lsp_finder,
+            func = lsp_finder,
             desc = 'lsp_finder'
           },
           {
             key = "gd",
-            func = require('lspsaga.definition').preview_definition,
+            func = function() require('lspsaga.definition'):preview_definition() end,
             desc = 'preview_definition'
           }, {
             key = 'gD',
@@ -131,11 +139,11 @@ function module.init(use)
           },
           {
             key = "ga",
-            func = require('lspsaga.codeaction').code_action,
+            func = function() require('lspsaga.codeaction'):code_action() end,
             desc = 'code_action'
           }, {
             key = 'K',
-            func = require('lspsaga.hover').render_hover_doc,
+            func = function() require('lspsaga.hover'):render_hover_doc() end,
             desc = 'hover'
           }, {
             key = "gi",
@@ -145,10 +153,10 @@ function module.init(use)
             key = "<leader>d",
             func = vim.lsp.buf.type_definition,
             desc = 'type_definition'
-          }, {
-            key = 'gh',
-            func = require('lspsaga.signaturehelp').signature_help,
-            desc = 'signature_help'
+          -- }, {
+          --   key = 'gh',
+          --   func = require('lspsaga.signaturehelp').signature_help,
+          --   desc = 'signature_help'
           }, {
             key = "gL",
             func = require('navigator.diagnostics').show_diagnostics,
