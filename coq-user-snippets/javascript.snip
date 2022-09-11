@@ -1,7 +1,7 @@
-snippet console.log
+snippet console.log(msg);
 alias cl
-  console.log("@-->${1:var}"${0:...});
+  console.log('@-->${1:msg}'${0});
 
-snippet console.log({})
+snippet console.log(value);
 alias clo
-  console.log({ ${1:var}: ${1:var}${0:...} });
+  console.log('@-->${1:var}:', $1${0});

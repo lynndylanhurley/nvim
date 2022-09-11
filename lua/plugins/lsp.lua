@@ -4,17 +4,36 @@ function module.init(use)
   use {
     'williamboman/mason.nvim',
     requires = {
+      -- lsp (language server support)
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "glepnir/lspsaga.nvim",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
+      { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+
+      -- cmp (autocompletion)
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/nvim-cmp',
+      'windwp/nvim-autopairs',
+      'onsails/lspkind-nvim',
+
+      -- code snippets
+      'honza/vim-snippets',
+      'dcampos/cmp-snippy',
+      'dcampos/nvim-snippy',
+      'honza/vim-snippets',
+      'windwp/nvim-autopairs',
+
+      -- null-ls (linting + formatting)
       {
         'jose-elias-alvarez/null-ls.nvim',
         requires = {
           { 'nvim-lua/plenary.nvim' },
         },
       },
-      { "WhoIsSethDaniel/mason-tool-installer.nvim" },
       { "jayp0521/mason-null-ls.nvim" }
     },
     config = function()
@@ -33,22 +52,17 @@ function module.init(use)
         "remark-language-server",
         "intelephense",
         "solargraph",
-        -- "sqls",
         "yaml-language-server",
-        -- "shfmt",
         "rubocop",
         "luaformatter",
         "sql-formatter",
       }
 
-      -- local formatters = {
-      --   -- null-ls linters
-      --   "php-cs-fixer"
-      -- }
-
       local null_ls = require('null-ls')
-
-      require("mason").setup()
+      local snippy = require("snippy")
+      local lspkind = require('lspkind')
+      local cmp = require('cmp')
+      local mason_lspconfig = require("mason-lspconfig")
 
       -- configure LSP servers
       local enhance_server_opts = {
@@ -100,22 +114,26 @@ function module.init(use)
         end
       }
 
-      mason_lspconfig = require("mason-lspconfig")
+      require("mason").setup()
 
       mason_lspconfig.setup({
         ensure_installed = servers,
         automatic_installation = true
       })
 
-      function global_on_attach(client, bufnr)
+      -- settings shared across all LSP servers
+      local global_on_attach = function(client, _)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
         -- navic.attach(client, bufnr)
       end
 
+      -- initialize buffer with appropriate LSP handler
       mason_lspconfig.setup_handlers({
         function(server_name)
-          local options = {}
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          local server_capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+          local options = { capabilities = server_capabilities }
 
           if enhance_server_opts[server_name] then
             enhance_server_opts[server_name](options)
@@ -172,6 +190,47 @@ function module.init(use)
         },
       })
 
+      -- snippets
+      snippy.setup({
+        mappings = {
+          is = {
+            ["<Tab>"] = "expand_or_advance",
+            ["<S-Tab>"] = "previous",
+          },
+          nx = {
+            ["<leader>x"] = "cut_text",
+          },
+        },
+      })
+
+      -- completion
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            require'snippy'.expand_snippet(args.body)
+          end
+        },
+
+        formatting = {
+          format = lspkind.cmp_format(),
+        },
+
+        sources = cmp.config.sources({
+          {name = 'snippy', keyword_length = 2},
+          {name = 'nvim_lsp', keyword_length = 2},
+          {name = 'path'},
+        }),
+
+        view = {
+          entries = 'native'
+        }
+      }
+
+      -- auto-close parens + brackets
+      require('nvim-autopairs').setup({
+        disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
+      })
+
       -- default keymap options
       local o = { silent = true }
 
@@ -181,7 +240,7 @@ function module.init(use)
       -- lsp keymaps
       keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", o)
       keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", o)
-      keymap({"n", "v"}, "ga", "<cmd>Lspsaga code_action<CR>", o)
+      keymap({ "n", "v" }, "ga", "<cmd>Lspsaga code_action<CR>", o)
       keymap("n", "go", "<cmd>LSoutlineToggle<CR>", o)
       keymap("n", "gr", "<cmd>Lspsaga rename<CR>", o)
       keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>", o)
@@ -208,4 +267,3 @@ function module.init(use)
 end
 
 return module
-
