@@ -170,8 +170,6 @@ function module.init(use)
       -- linter / formatter
       null_ls.setup()
 
-      -- configure individual LSP servers
-
       -- LPS tools
       require("lspsaga").init_lsp_saga({
         definition_action_keys = {
