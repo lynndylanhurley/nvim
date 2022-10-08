@@ -165,7 +165,7 @@ function module.init(use)
         -- null_ls_sources = formatters,
         auto_update = true
       })
-      require("mason-null-ls").check_install(true)
+      -- require("mason-null-ls").check_install(true)
 
       -- linter / formatter
       null_ls.setup()

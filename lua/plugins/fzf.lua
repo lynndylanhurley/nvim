@@ -30,7 +30,7 @@ function module.init(use)
       map('n', '<leader>t', "<cmd>lua require('fzf-lua').files()<cr>", opts)
       map('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<cr>", opts)
       map('n', '<leader>/', "<cmd>lua require('fzf-lua').live_grep()<cr>", opts)
-      map('n', '<leader>c', "<cmd>lua require('fzf-lua').git_commits()<cr>", opts)
+      -- map('n', '<leader>c', "<cmd>lua require('fzf-lua').git_commits()<cr>", opts)
     end
   }
 end

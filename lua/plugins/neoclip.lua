@@ -3,10 +3,22 @@ local module = {}
 function module.init(use)
   use {
     "AckslD/nvim-neoclip.lua",
+    requires = {
+      -- { 'kkharji/sqlite.lua', module = 'sqlite' },
+      { 'ibhagwan/fzf-lua' },
+    },
     config = function()
-      require('telescope').load_extension('neoclip')
-      require('neoclip').setup()
-      map('', '<c-p>', '<cmd>Telescope neoclip<cr>')
+      require('neoclip').setup({
+        -- enable_persistent_history = true,
+        -- continuous_sync = true,
+        -- keys = {
+        --   fzf = {
+        --     paste = '<nop>',
+        --     paste_behind = '<nop>',
+        --   }
+        -- }
+      })
+      map('', '<c-p>', "<cmd>lua require('neoclip.fzf')()<cr>")
     end
   }
 end

@@ -62,3 +62,6 @@ local home = vim.env.HOME
 vim.g.python_host_prog = home .. '/.pyenv/shims/python'
 vim.g.python2_host_prog = home ..'/.pyenv/shims/python2'
 vim.g.python3_host_prog = home .. '/.pyenv/shims/python3'
+
+-- command line height
+vim.o.ch = 0

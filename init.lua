@@ -10,7 +10,13 @@ require('utils')
 require('settings')
 require('keymaps')
 
-return require('packer').startup({function(use)
+local packer = require('packer')
+
+packer.init {
+  max_jobs = 15
+}
+
+return packer.startup({function(use)
   -- packer self-update
   use { 'wbthomason/packer.nvim' }
 
@@ -23,6 +29,7 @@ return require('packer').startup({function(use)
 
     -- appearance
     'devicons',
+    -- 'ccc',
     -- 'hexokinase',
     -- 'galaxyline',
     -- 'feline',
@@ -39,9 +46,14 @@ return require('packer').startup({function(use)
     -- 'lighthaus',
     -- 'onedark',
     -- 'zenbones',
-    -- 'darkplus',
-    'tundra',
+    'darkplus',
+    -- 'noctis',
+    -- 'tundra',
+    -- 'kanagawa',
     -- 'monokai',
+    -- 'codeschool',
+    -- 'minimal',
+    -- 'no_clown_fiesta',
     'lualine',
 
     -- syntax
@@ -62,13 +74,15 @@ return require('packer').startup({function(use)
     'wordmotion',
     'rsi', -- alt / backspace support
     -- 'yoink',
+    -- 'yanky',
+    'neoclip',
     'wilder',
 
     -- file navigation
     'nvim_tree',
     -- 'neo_tree',
-    'fzf',
-    -- 'telescope',
+    -- 'fzf',
+    'telescope',
 
     -- buffer navigation
     'lightspeed',
@@ -77,19 +91,21 @@ return require('packer').startup({function(use)
 
     -- help
     'which_key',
+    -- 'noice',
 
     -- language specific
     -- 'package_info', -- package.json helper
     'vim_package_info', -- package.json helper
+    'glsl',
 
     -- lsp
     -- 'coq',
     -- 'trouble',
-    -- 'diagnostic_window',
     'lsp_colors',
     -- 'cmp',
     -- 'navigator',
     'lsp',
+    'diagnostic_window',
 
     -- linting / testing
     'whitespace',
