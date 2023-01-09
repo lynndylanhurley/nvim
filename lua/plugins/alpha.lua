@@ -3,7 +3,7 @@ local module = {}
 function module.init(use)
   use {
     'goolord/alpha-nvim',
-    requires = {'kyazdani42/nvim-web-devicons'},
+    dependencies = {'kyazdani42/nvim-web-devicons'},
     config = function()
       local alpha = require'alpha'
       local dashboard = require 'alpha.themes.dashboard'

@@ -6,9 +6,9 @@ function module.init(use)
     requires = "MunifTanjim/nui.nvim",
     config = function()
       require('package-info').setup({
-        colors = {
-          outdated = "#5180b3",
-        }
+        -- colors = {
+        --   outdated = "#5180b3",
+        -- }
       })
     end
   }

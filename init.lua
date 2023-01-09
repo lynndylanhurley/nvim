@@ -1,20 +1,21 @@
 -- bootstrap packer
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd 'packadd packer.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
 require('utils')
 require('settings')
 require('keymaps')
-
-local packer = require('packer')
-
-packer.init {
-  max_jobs = 15
-}
 
 return packer.startup({function(use)
   -- packer self-update
@@ -46,7 +47,9 @@ return packer.startup({function(use)
     -- 'lighthaus',
     -- 'onedark',
     -- 'zenbones',
-    'darkplus',
+    -- 'darkplus',
+    'oh_lucy',
+    -- 'iceberg',
     -- 'noctis',
     -- 'tundra',
     -- 'kanagawa',
@@ -77,10 +80,12 @@ return packer.startup({function(use)
     -- 'yanky',
     'neoclip',
     'wilder',
+    'doge',
+    'auto_hls',
 
     -- file navigation
-    'nvim_tree',
-    -- 'neo_tree',
+    -- 'nvim_tree',
+    'neo_tree',
     -- 'fzf',
     'telescope',
 
@@ -94,8 +99,8 @@ return packer.startup({function(use)
     -- 'noice',
 
     -- language specific
-    -- 'package_info', -- package.json helper
-    'vim_package_info', -- package.json helper
+    'package_info', -- package.json helper
+    'import_cost', -- js import package sizes
     'glsl',
 
     -- lsp
@@ -109,7 +114,8 @@ return packer.startup({function(use)
 
     -- linting / testing
     'whitespace',
-    'vim_test',
+    -- 'vim_test',
+    'neotest',
     -- 'null_ls_config',
 
     -- fun
