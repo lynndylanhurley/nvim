@@ -24,3 +24,12 @@ function _G.check_back_space()
   local col = vim.fn.col(".") - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
 end
+
+function _G.into(f, t)
+    local t1 = {}
+    local t_len = #t
+    for i = 1, t_len do
+        t1[i] = f(t[i])
+    end
+    return t1
+end

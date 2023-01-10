@@ -1,7 +1,1 @@
-local module = {}
-
-function module.init(use)
-  use { 'tpope/vim-sleuth' }
-end
-
-return module
+return { 'tpope/vim-sleuth' }
