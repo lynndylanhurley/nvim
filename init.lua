@@ -86,7 +86,7 @@ plugin_modules = {
 
   -- buffer navigation
   'lightspeed',
-  'bfq',
+  -- 'bfq',
   -- 'slash',
 
   -- help
@@ -106,6 +106,7 @@ plugin_modules = {
   -- 'navigator',
   'lsp',
   'diagnostic_window',
+  'lspsaga',
 
   -- linting / testing
   'whitespace',

@@ -136,7 +136,6 @@ return {
     -- lsp (language server support)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    "glepnir/lspsaga.nvim",
     "jose-elias-alvarez/nvim-lsp-ts-utils",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -292,23 +291,6 @@ return {
     -- linter / formatter
     null_ls.setup()
 
-    -- LPS tools
-    require("lspsaga").init_lsp_saga({
-      definition_action_keys = {
-        edit = '<cr>',
-        vsplit = '<C-c>v',
-        split = '<C-c>i',
-        tabe = '<C-c>t',
-        quit = 'q',
-      },
-      finder_action_keys = {
-        open = "<cr>"
-      },
-      symbol_in_winbar = {
-        enable = false,
-      },
-    })
-
     -- snippets
     snippy.setup({
       mappings = {
@@ -356,30 +338,7 @@ return {
     { '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>', desc = 'LspFormat' },
 
     -- lsp keymaps
-    { "gh", "<cmd>Lspsaga lsp_finder<CR>", desc = 'LspFinder' },
-    { "K", "<cmd>Lspsaga hover_doc<CR>", desc = 'LspHover' },
-    { "ga", "<cmd>Lspsaga code_action<CR>", desc = 'CodeAction' },
-    { "go", "<cmd>LSoutlineToggle<CR>", desc = 'LspOutlineToggle' },
-    { "gr", "<cmd>Lspsaga rename<CR>", desc = 'LspRename' },
-    { "gd", "<cmd>Lspsaga peek_definition<CR>", desc = 'LspPeekDef' },
     { "gD", vim.lsp.buf.type_definition, desc = 'LspGotoDef' },
     { "gi", vim.lsp.buf.implementation, desc = 'LspGotoImp' },
-
-    -- keymap("n", "gx", "<cmd>Lspsaga show_cursor_diagnostics<CR>", o)
-    { "gx", "<cmd>Lspsaga show_line_diagnostics<CR>", desc = 'ShowLineDiag' },
-    { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = 'GotoPrevDiag' },
-    { "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", desc = 'GotoNextDiag' },
-
-    -- Only jump to error
-    { "[E", function()
-      require("lspsaga.diagnostic").goto_prev({
-        severity = vim.diagnostic.severity.ERROR
-      })
-    end, desc = 'GotoPrevErr' },
-    { "]E", function()
-      require("lspsaga.diagnostic").goto_next({
-        severity = vim.diagnostic.severity.ERROR
-      })
-    end, desc = 'GotoNextErr' }
   }
 }
