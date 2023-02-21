@@ -1,5 +1,6 @@
 return {
   'numtostr/FTerm.nvim',
+  lazy = false,
   config = function()
     require'FTerm'.setup({
       dimensions  = {
@@ -11,8 +12,7 @@ return {
       border = 'single', -- or 'double'
       auto_close = true,
     })
-    local opts = { noremap = true, silent = true }
-    map('n', '<c-space>', '<cmd>lua require("Fterm").toggle()<cr>', opts)
-    map('t', '<c-space>', '<c-\\><c-n><cmd>lua require("FTerm").close()<cr>', opts)
+    vim.keymap.set('n', '<c-space>', '<cmd>lua require("FTerm").toggle()<cr>')
+    vim.keymap.set('t', '<c-space>', '<c-\\><c-n><cmd>lua require("FTerm").close()<cr>')
   end
 }

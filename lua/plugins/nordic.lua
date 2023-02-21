@@ -4,13 +4,16 @@ return {
     {'nvim-lualine/lualine.nvim'},
   },
   config = function()
+
+    require('nordic').setup({})
+
     vim.cmd[[colorscheme nordic]]
 
-    require 'lualine' .setup {
+    require('lualine').setup({
       options = {
         theme = 'nordic'
       }
-    }
+    })
   end
 }
 

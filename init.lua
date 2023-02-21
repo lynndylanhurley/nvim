@@ -47,6 +47,8 @@ plugin_modules = {
   -- 'iceberg',
   -- 'noctis',
   'nordic',
+  -- 'rose_pine',
+  -- 'catppuccin',
   -- 'tundra',
   -- 'kanagawa',
   -- 'monokai',
@@ -118,6 +120,7 @@ plugin_modules = {
   -- fun
   -- 'dashboard',
   'alpha',
+  -- 'copilot',
 
   -- system
   -- 'floaterm',
