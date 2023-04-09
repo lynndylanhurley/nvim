@@ -69,6 +69,7 @@ plugin_modules = {
   'nvim_comment',
   'repeat',
   'surround',
+  -- 'mini',
   'unimpaired',
   --'ultisnips',
   -- 'snippy',
