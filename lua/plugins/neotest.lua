@@ -9,6 +9,7 @@ return {
     'mfussenegger/nvim-dap',
     "rcarriga/nvim-dap-ui",
     "antoinemadec/FixCursorHold.nvim",
+    "olimorris/neotest-rspec"
   },
   config = function()
     neotest = require('neotest')
@@ -20,6 +21,7 @@ return {
       adapters = {
         require("neotest-rust"),
         require("neotest-vitest"),
+        require("neotest-rspec")
       }
     })
 
@@ -39,7 +41,7 @@ return {
         require('neotest').run.run()
       end,
       desc = 'NeotestNearest' },
-    { '<leader>ro',
+    { '<leader>rf',
       function()
         require('neotest').run.run(vim.fn.expand('%'))
       end,

@@ -162,7 +162,7 @@ return {
   config = function()
     local lsp_servers = {
       vim.g.lsp_mason_mappings["eslint"],
-      vim.g.lsp_mason_mappings["tsserver"],
+      -- vim.g.lsp_mason_mappings["tsserver"],
       vim.g.lsp_mason_mappings["cssls"],
       vim.g.lsp_mason_mappings["intelephense"],
       vim.g.lsp_mason_mappings["dockerls"],
@@ -171,6 +171,7 @@ return {
       vim.g.lsp_mason_mappings["html"],
       vim.g.lsp_mason_mappings["rust_analyzer"],
       vim.g.lsp_mason_mappings["yamlls"],
+      vim.g.lsp_mason_mappings["solargraph"],
     }
 
     local null_ls = require('null-ls')
@@ -193,24 +194,13 @@ return {
 
       ['tsserver'] = function(options)
         options.on_attach = function(client, bufnr)
-          local ts_utils = require("nvim-lsp-ts-utils")
-          ts_utils.setup({})
-          ts_utils.setup_client(client)
+          -- local ts_utils = require("nvim-lsp-ts-utils")
+          -- ts_utils.setup({})
+          -- ts_utils.setup_client(client)
 
           -- let eslint do the formatting
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
-
-          -- no default maps, so you may want to define some here
-          local opts = {
-            silent = true,
-            -- format = { enable = false } -- prefer eslint for formatting
-          }
-          vim.api.nvim_buf_set_keymap(bufnr, "n", "gs",
-            ":TSLspOrganize<CR>", opts)
-          -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-          vim.api.nvim_buf_set_keymap(bufnr, "n", "gi",
-            ":TSLspImportAll<CR>", opts)
         end
       end,
 

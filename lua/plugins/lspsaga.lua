@@ -12,7 +12,9 @@ return {
         quit = 'q',
       },
       finder = {
-        open = "<cr>"
+        keys = {
+          expand_or_jump = "<cr>",
+        }
       },
       symbol_in_winbar = {
         enable = false,
@@ -25,7 +27,7 @@ return {
     { "ga", "<cmd>Lspsaga code_action<CR>", desc = 'CodeAction' },
     -- { "go", "<cmd>LSoutlineToggle<CR>", desc = 'LspOutlineToggle' },
     { "gr", "<cmd>Lspsaga rename<CR>", desc = 'LspRename' },
-    { "gd", "<cmd>Lspsaga peek_definition<CR>", desc = 'LspPeekDef' },
+    { "gd", "<cmd>Lspsaga goto_type_definition<CR>", desc = 'LspPeekDef' },
 
     { "gx", "<cmd>Lspsaga show_line_diagnostics<CR>", desc = 'ShowLineDiag' },
     { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = 'GotoPrevDiag' },

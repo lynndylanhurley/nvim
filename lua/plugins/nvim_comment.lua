@@ -1,24 +1,20 @@
 return {
-  'terrortylor/nvim-comment',
-  dependencies = {
-    { 'JoosepAlviste/nvim-ts-context-commentstring' }
-  },
+  'numToStr/Comment.nvim',
   config = function()
-    -- context aware comment string
-    require'nvim-treesitter.configs'.setup {
-      context_commentstring = {
-        enable = true
+    require('Comment').setup({
+      toggler = {
+          ---Line-comment toggle keymap
+          line = '<leader>c<space>',
+          ---Block-comment toggle keymap
+          block = '<leader>c<space>'
+      },
+      ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+      opleader = {
+          ---Line-comment keymap
+          line = '<leader>c<space>',
+          ---Block-comment keymap
+          block = '<leader>c<space>'
       }
-    }
-
-    require('nvim_comment').setup({
-      line_mapping = "gc",
-      operator_mapping = "<leader>c<space>",
-      hook = function()
-        require("ts_context_commentstring.internal").update_commentstring()
-      end
     })
-
-    map('n', '<leader>c<space>', ':CommentToggle<cr>', { noremap = true, silent = true })
   end
 }

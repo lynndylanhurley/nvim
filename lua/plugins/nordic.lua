@@ -27,6 +27,10 @@ return {
         },
         NeoTreeGitUntracked = {
           fg = c.gray5
+        },
+        Visual = {
+          bg = c.gray1,
+          bold = false
         }
       }
     })

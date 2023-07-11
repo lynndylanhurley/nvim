@@ -7,9 +7,6 @@ return {
     require'nvim-treesitter.configs'.setup {
       ensure_installed = "all",
       ignore_install = { "phpdoc" },
-      context_commentstring = {
-        enable = true
-      },
       highlight = {
         use_languagetree = true,
         enable = true,

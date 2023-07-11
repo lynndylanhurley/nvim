@@ -19,6 +19,7 @@ require('keymaps')
 plugin_modules = {
   -- speed up nvim load time
   'impatient',
+  'bfq',
 
   -- icons
   -- 'circles',
@@ -29,7 +30,7 @@ plugin_modules = {
   -- 'hexokinase',
   -- 'galaxyline',
   -- 'feline',
-  -- 'indent_blankline',
+  'indent_blankline',
 
   -- colorschemes
   -- 'nightfox',
@@ -51,7 +52,7 @@ plugin_modules = {
   -- 'catppuccin',
   -- 'tundra',
   -- 'kanagawa',
-  -- 'monokai',
+  -- 'monokai_pro',
   -- 'codeschool',
   -- 'minimal',
   -- 'no_clown_fiesta',
@@ -66,7 +67,7 @@ plugin_modules = {
   -- 'nvim_autopairs',
   'visual_multi',
   -- 'comment',
-  'nvim_comment',
+  -- 'nvim_comment',
   'repeat',
   'surround',
   -- 'mini',
@@ -95,12 +96,15 @@ plugin_modules = {
 
   -- help
   'which_key',
+  'chat_gpt',
   -- 'noice',
 
   -- language specific
   'package_info', -- package.json helper
   'import_cost', -- js import package sizes
   'glsl',
+  'vim_ruby',
+  'ts_tools',
 
   -- lsp
   -- 'coq',
@@ -114,8 +118,8 @@ plugin_modules = {
 
   -- linting / testing
   'whitespace',
-  -- 'vim_test',
-  'neotest',
+  'vim_test',
+  -- 'neotest',
   -- 'null_ls_config',
 
   -- fun

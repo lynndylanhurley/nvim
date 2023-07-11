@@ -57,6 +57,8 @@ return {
         }
       }
     })
-    map('', '<C-a>', ':Neotree toggle<cr>')
-  end
+  end,
+  keys = {
+    { '<C-a>', ':Neotree toggle<cr>', desc = "NeoTree" }
+  }
 }
