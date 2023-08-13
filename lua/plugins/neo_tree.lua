@@ -1,6 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  branch = "v2.x",
+  branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
@@ -8,6 +8,7 @@ return {
     {
       -- only needed if you want to use the commands with "_with_window_picker" suffix
       's1n7ax/nvim-window-picker',
+      tag = "v1.5",
       config = function()
         require('window-picker').setup({
           autoselect_one = true,

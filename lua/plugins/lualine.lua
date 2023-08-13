@@ -6,7 +6,7 @@ return {
   config = function()
     require('lualine').setup {
       options = {
-        theme = "monokai-pro",
+        theme = "sherbet",
         component_separators = { left_sep = '', right_sep = ''},
         section_separators = { left_sep = '', right_sep = ''},
       },

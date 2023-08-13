@@ -13,7 +13,7 @@ return {
       },
       finder = {
         keys = {
-          expand_or_jump = "<cr>",
+          toggle_or_open = "<cr>",
         }
       },
       symbol_in_winbar = {
@@ -22,12 +22,13 @@ return {
     })
   end,
   keys = {
-    { "gh", "<cmd>Lspsaga lsp_finder<CR>", desc = 'LspFinder' },
+    { "gh", "<cmd>Lspsaga finder def+ref<CR>", desc = 'LspFinder' },
     { "K", "<cmd>Lspsaga hover_doc<CR>", desc = 'LspHover' },
     { "ga", "<cmd>Lspsaga code_action<CR>", desc = 'CodeAction' },
     -- { "go", "<cmd>LSoutlineToggle<CR>", desc = 'LspOutlineToggle' },
     { "gr", "<cmd>Lspsaga rename<CR>", desc = 'LspRename' },
-    { "gd", "<cmd>Lspsaga goto_type_definition<CR>", desc = 'LspPeekDef' },
+    { "gd", "<cmd>Lspsaga peek_definition<CR>", desc = 'LspPeekDef' },
+    { "gD", "<cmd>Lspsaga peek_type_definition<CR>", desc = 'LspPeekDef' },
 
     { "gx", "<cmd>Lspsaga show_line_diagnostics<CR>", desc = 'ShowLineDiag' },
     { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = 'GotoPrevDiag' },

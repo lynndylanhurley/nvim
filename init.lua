@@ -47,7 +47,8 @@ plugin_modules = {
   -- 'oh_lucy',
   -- 'iceberg',
   -- 'noctis',
-  'nordic',
+  -- 'nordic',
+  'sherbet',
   -- 'rose_pine',
   -- 'catppuccin',
   -- 'tundra',
@@ -84,8 +85,8 @@ plugin_modules = {
   'auto_hls',
 
   -- file navigation
-  -- 'nvim_tree',
-  'neo_tree',
+  'nvim_tree',
+  -- 'neo_tree',
   -- 'fzf',
   'telescope',
 

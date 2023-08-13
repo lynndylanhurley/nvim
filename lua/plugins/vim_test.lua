@@ -22,7 +22,7 @@ end
 return {
   'vim-test/vim-test',
   dependencies = { { 'kassio/neoterm' } },
-  config = function()
+  init = function()
     vim.g['test#strategy'] = 'neoterm'
     vim.g['test#neoterm#term_position'] = 'vert'
     vim.g['test#preserve_screen'] = 1

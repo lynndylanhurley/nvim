@@ -12,6 +12,9 @@ return {
       nordic = {
         reduced_blue = true
       },
+      ts_context = {
+        dark_background = true
+      },
       override = {
         Comment = {
           fg = c.gray5
