@@ -157,7 +157,7 @@ return {
     -- null-ls (linting + formatting)
     'nvim-lua/plenary.nvim',
     'jose-elias-alvarez/null-ls.nvim',
-    "jayp0521/mason-null-ls.nvim"
+    "jayp0521/mason-null-ls.nvim",
   },
   config = function()
     local lsp_servers = {
@@ -169,7 +169,7 @@ return {
       vim.g.lsp_mason_mappings["dotls"],
       vim.g.lsp_mason_mappings["graphql"],
       vim.g.lsp_mason_mappings["html"],
-      vim.g.lsp_mason_mappings["rust_analyzer"],
+      -- vim.g.lsp_mason_mappings["rust_analyzer"],
       vim.g.lsp_mason_mappings["yamlls"],
       vim.g.lsp_mason_mappings["solargraph"],
     }
@@ -224,7 +224,7 @@ return {
           -- client.server_capabilities.document_formatting = true
           -- client.server_capabilities.documentRangeFormattingProvider = true
         end
-      end
+      end,
     }
 
     require("mason").setup()
@@ -325,10 +325,10 @@ return {
   end,
   keys = {
     -- format keymaps
-    { '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>', desc = 'LspFormat' },
+    { '<leader>f', vim.lsp.buf.format, desc = 'LspFormat' },
 
     -- lsp keymaps
     { "gD", vim.lsp.buf.type_definition, desc = 'LspGotoDef' },
-    { "gi", vim.lsp.buf.implementation, desc = 'LspGotoImp' },
+    { "gi", vim.lsp.buf.implementation, desc = 'LspGotoImp' }
   }
 }

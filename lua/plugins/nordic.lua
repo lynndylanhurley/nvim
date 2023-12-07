@@ -34,7 +34,15 @@ return {
         Visual = {
           bg = c.gray1,
           bold = false
-        }
+        },
+        IndentBlanklineScope = {
+          fg = c.gray1
+        },
+        IndentBlanklineChar = {
+          fg = c.gray1
+        },
+        IblIndent = { fg = c.gray1 },
+        IblScope = { fg = c.gray1 }
       }
     })
 

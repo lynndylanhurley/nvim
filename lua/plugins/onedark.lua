@@ -8,17 +8,18 @@ function highlight(group, options)
 end
 
 return {
-    'ful1e5/onedark.nvim',
+    'navarasu/onedark.nvim',
     config = function()
         onedark = require('onedark')
 
         onedark.setup({
-            dark_sidebar = true,
-            highlight_linenumber = false,
-            sidebars = {"qf", "vista_kind", "terminal", "packer", "NvimTree"}
+            style = 'warmer',
+            highlights = {
+                IblIndent = { fg = '#3e444e' },
+                IblScope = { fg = '#3e444e' }
+            }
         })
 
-        -- highlight("IndentGuide", {fg = "#3e444e"})
-        highlight("IndentBlanklineChar", {fg = "#3e444e", gui = "nocombine"})
+        onedark.load()
     end
 }

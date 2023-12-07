@@ -6,13 +6,6 @@ return {
       git = {
         ignore = false
       },
-      view = {
-        mappings = {
-          list = {
-            { key = "o", cb = ":lua NvimTreeOSOpen()<cr>" }
-          }
-        }
-      },
       renderer = {
         icons = {
           show = {
@@ -23,16 +16,6 @@ return {
         }
       }
     }
-
-    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-    function NvimTreeOSOpen()
-      local lib = require "nvim-tree.lib"
-      local node = lib.get_node_at_cursor()
-      if node then
-        vim.fn.jobstart("open '" .. node.absolute_path .. "' &", {detach = true})
-      end
-    end
 
     map('', '<C-a>', ':NvimTreeToggle<CR>')
   end

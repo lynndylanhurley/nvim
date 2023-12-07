@@ -1,4 +1,4 @@
--- bootstrap packer
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -48,11 +48,12 @@ plugin_modules = {
   -- 'iceberg',
   -- 'noctis',
   -- 'nordic',
-  'sherbet',
+  -- 'caret',
+  -- 'sherbet',
   -- 'rose_pine',
   -- 'catppuccin',
   -- 'tundra',
-  -- 'kanagawa',
+  'kanagawa',
   -- 'monokai_pro',
   -- 'codeschool',
   -- 'minimal',
@@ -85,8 +86,8 @@ plugin_modules = {
   'auto_hls',
 
   -- file navigation
-  'nvim_tree',
-  -- 'neo_tree',
+  -- 'nvim_tree',
+  'neo_tree',
   -- 'fzf',
   'telescope',
 
@@ -106,6 +107,7 @@ plugin_modules = {
   'glsl',
   'vim_ruby',
   'ts_tools',
+  'rust_tools',
 
   -- lsp
   -- 'coq',
@@ -126,6 +128,7 @@ plugin_modules = {
   -- fun
   -- 'dashboard',
   'alpha',
+  'leetcode',
   -- 'copilot',
 
   -- system
@@ -141,6 +144,7 @@ plugin_modules = {
   'gv',
 
   -- debuggers
+  'neodev',
   -- 'dap',
 
   -- project

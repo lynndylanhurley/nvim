@@ -22,7 +22,7 @@ return {
     })
   end,
   keys = {
-    { "gh", "<cmd>Lspsaga finder def+ref<CR>", desc = 'LspFinder' },
+    -- { "gr", "<cmd>Lspsaga finder def+ref<CR>", desc = 'LspFinder' },
     { "K", "<cmd>Lspsaga hover_doc<CR>", desc = 'LspHover' },
     { "ga", "<cmd>Lspsaga code_action<CR>", desc = 'CodeAction' },
     -- { "go", "<cmd>LSoutlineToggle<CR>", desc = 'LspOutlineToggle' },

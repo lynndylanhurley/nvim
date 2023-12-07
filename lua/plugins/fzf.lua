@@ -3,8 +3,7 @@ return {
   dependencies = {
     { 'junegunn/fzf', build = './install --bin' },
     { 'vijaymarupudi/nvim-fzf' },
-    { 'kyazdani42/nvim-web-devicons' },
-    { 'bogado/file-line' },
+    { 'kyazdani42/nvim-web-devicons' }
   },
   config = function()
     require("fzf").default_options = {
@@ -21,12 +20,10 @@ return {
         }
       }
     }
-
-    local opts = { noremap = true, silent = true }
-
-    map('n', '<leader>t', "<cmd>lua require('fzf-lua').files()<cr>", opts)
-    map('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<cr>", opts)
-    map('n', '<leader>/', "<cmd>lua require('fzf-lua').live_grep()<cr>", opts)
-    -- map('n', '<leader>c', "<cmd>lua require('fzf-lua').git_commits()<cr>", opts)
-  end
+  end,
+  keys = {
+    { '<leader>t', "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find file" },
+    { '<leader>b', "<cmd>lua require('fzf-lua').buffers()<cr>", desc = "Find open buffer" },
+    { '<leader>/', "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Grep project dir" }
+  }
 }

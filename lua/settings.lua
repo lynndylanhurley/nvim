@@ -65,3 +65,6 @@ vim.g.python3_host_prog = home .. '/.pyenv/shims/python3'
 
 -- command line height
 vim.o.ch = 0
+
+-- fixed width signcolumn
+vim.o.signcolumn = 'yes:1'
