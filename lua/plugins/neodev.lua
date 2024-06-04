@@ -2,6 +2,7 @@ return {
   "folke/neodev.nvim",
   dependencies = {
     "mfussenegger/nvim-dap",
+    "nvim-neotest/nvim-nio",
     "rcarriga/nvim-dap-ui"
   },
   opts = {

@@ -63,6 +63,7 @@ plugin_modules = {
   -- syntax
   'treesitter',
   -- 'vim_sleuth',
+  'slint',
   'indent_o_matic',
 
   -- typing
@@ -98,11 +99,10 @@ plugin_modules = {
 
   -- help
   'which_key',
-  'chat_gpt',
   -- 'noice',
 
   -- language specific
-  'package_info', -- package.json helper
+  -- 'package_info', -- package.json helper
   'import_cost', -- js import package sizes
   'glsl',
   'vim_ruby',
@@ -129,6 +129,9 @@ plugin_modules = {
   -- 'dashboard',
   'alpha',
   'leetcode',
+  'chat_gpt',
+  -- 'obsidian',
+  -- 'codeium',
   -- 'copilot',
 
   -- system

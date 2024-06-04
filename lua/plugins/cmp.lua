@@ -15,9 +15,13 @@ return {
     local cmp = require('cmp')
     local snippy = require("snippy")
     local lspkind = require('lspkind')
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
     require('nvim-autopairs').setup({
       disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
+      enable_afterquote = false,
+      enable_moveright = false,
+      check_ts = true
     })
 
     snippy.setup({
@@ -53,5 +57,10 @@ return {
         entries = 'native'
       }
     }
+
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done()
+    )
   end
 }

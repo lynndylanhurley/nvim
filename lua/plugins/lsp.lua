@@ -156,15 +156,16 @@ return {
 
     -- null-ls (linting + formatting)
     'nvim-lua/plenary.nvim',
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     "jayp0521/mason-null-ls.nvim",
   },
   config = function()
     local lsp_servers = {
       vim.g.lsp_mason_mappings["eslint"],
+      vim.g.lsp_mason_mappings["slint_lsp"],
       -- vim.g.lsp_mason_mappings["tsserver"],
       vim.g.lsp_mason_mappings["cssls"],
-      vim.g.lsp_mason_mappings["intelephense"],
+      -- vim.g.lsp_mason_mappings["intelephense"],
       vim.g.lsp_mason_mappings["dockerls"],
       vim.g.lsp_mason_mappings["dotls"],
       vim.g.lsp_mason_mappings["graphql"],
@@ -172,6 +173,7 @@ return {
       -- vim.g.lsp_mason_mappings["rust_analyzer"],
       vim.g.lsp_mason_mappings["yamlls"],
       vim.g.lsp_mason_mappings["solargraph"],
+      vim.g.lsp_mason_mappings["phpactor"],
     }
 
     local null_ls = require('null-ls')
@@ -279,7 +281,11 @@ return {
     -- require("mason-null-ls").check_install(true)
 
     -- linter / formatter
-    null_ls.setup()
+    null_ls.setup({
+      sources = {
+        -- null_ls.builtins.formatting.prettierd
+      }
+    })
 
     -- snippets
     snippy.setup({
@@ -320,6 +326,9 @@ return {
     -- auto-close parens + brackets
     require('nvim-autopairs').setup({
       disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
+      enable_afterquote = false,
+      -- enable_moveright = false,
+      check_ts = true
     })
 
   end,

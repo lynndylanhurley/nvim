@@ -31,6 +31,8 @@ vim.o.hlsearch  = true
 -- all regex matches are substituted by default. g toggles this behavior
 vim.o.gdefault  = true
 
+vim.o.conceallevel = 1
+
 -- spltting a window will put the new window below the current one
 vim.o.splitbelow = true
 -- same as above but for horizontal splits
