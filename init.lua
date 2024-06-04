@@ -106,7 +106,7 @@ plugin_modules = {
   'import_cost', -- js import package sizes
   'glsl',
   'vim_ruby',
-  'ts_tools',
+  -- 'ts_tools',
   'rust_tools',
 
   -- lsp
