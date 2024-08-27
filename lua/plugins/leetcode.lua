@@ -9,7 +9,7 @@ return {
 
     -- optional
     "rcarriga/nvim-notify",
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
   },
   opts = {
     -- configuration goes here

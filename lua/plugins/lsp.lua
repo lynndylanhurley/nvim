@@ -10,6 +10,7 @@ vim.g.lsp_mason_mappings = {
   bashls 	= 'bash-language-server',
   beancount 	= 'beancount-language-server',
   bicep 	= 'bicep-lsp',
+  biome 	= 'biome',
   bsl_ls 	= 'bsl-language-server',
   bufls 	= 'buf-language-server',
   clangd 	= 'clangd',
@@ -163,6 +164,7 @@ return {
   config = function()
     local lsp_servers = {
       vim.g.lsp_mason_mappings["eslint"],
+      vim.g.lsp_mason_mappings["biome"],
       vim.g.lsp_mason_mappings["slint_lsp"],
       -- vim.g.lsp_mason_mappings["tsserver"],
       vim.g.lsp_mason_mappings["vtsls"],

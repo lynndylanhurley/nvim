@@ -3,7 +3,7 @@ return {
   dependencies = {
     { 'junegunn/fzf', build = './install --bin' },
     { 'vijaymarupudi/nvim-fzf' },
-    { 'kyazdani42/nvim-web-devicons' }
+    { 'nvim-tree/nvim-web-devicons' }
   },
   config = function()
     require("fzf").default_options = {
