@@ -166,8 +166,8 @@ return {
       vim.g.lsp_mason_mappings["eslint"],
       vim.g.lsp_mason_mappings["biome"],
       vim.g.lsp_mason_mappings["slint_lsp"],
-      -- vim.g.lsp_mason_mappings["tsserver"],
-      vim.g.lsp_mason_mappings["vtsls"],
+      vim.g.lsp_mason_mappings["tsserver"],
+      -- vim.g.lsp_mason_mappings["vtsls"],
       vim.g.lsp_mason_mappings["cssls"],
       -- vim.g.lsp_mason_mappings["intelephense"],
       vim.g.lsp_mason_mappings["dockerls"],
@@ -249,6 +249,10 @@ return {
     -- initialize buffer with appropriate LSP handler
     mason_lspconfig.setup_handlers({
       function(server_name)
+        if server_name == "tsserver" then
+          server_name = "ts_ls"
+        end
+
         local server_capabilities = require("cmp_nvim_lsp").default_capabilities()
         local options = { capabilities = server_capabilities }
 

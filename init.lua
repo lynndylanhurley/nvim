@@ -126,6 +126,8 @@ plugin_modules = {
   -- linting / testing
   'whitespace',
   'vim_test',
+  -- 'conform',
+  -- 'lint',
   -- 'neotest',
   -- 'null_ls_config',
 
