@@ -122,6 +122,10 @@ plugin_modules = {
   'lsp',
   'diagnostic_window',
   'lspsaga',
+  'none_ls',
+  'nvim_autopairs',
+  'cmp',
+  'snippy',
 
   -- linting / testing
   'whitespace',

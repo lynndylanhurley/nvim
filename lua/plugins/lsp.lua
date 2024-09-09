@@ -1,344 +1,58 @@
-vim.g.lsp_mason_mappings = {
-  als 	= 'ada-language-server',
-  angularls 	= 'angular-language-server',
-  ansiblels 	= 'ansible-language-server',
-  apex_ls 	= 'apex-language-server',
-  arduino_language_server 	= 'arduino-language-server',
-  asm_lsp 	= 'asm-lsp',
-  astro 	= 'astro-language-server',
-  awk_ls 	= 'awk-language-server',
-  bashls 	= 'bash-language-server',
-  beancount 	= 'beancount-language-server',
-  bicep 	= 'bicep-lsp',
-  biome 	= 'biome',
-  bsl_ls 	= 'bsl-language-server',
-  bufls 	= 'buf-language-server',
-  clangd 	= 'clangd',
-  clarity_lsp 	= 'clarity-lsp',
-  clojure_lsp 	= 'clojure-lsp',
-  cmake 	= 'cmake-language-server',
-  codeqlls 	= 'codeql',
-  crystalline 	= 'crystalline',
-  csharp_ls 	= 'csharp-language-server',
-  cssls 	= 'css-lsp',
-  cssmodules_ls 	= 'cssmodules-language-server',
-  cucumber_language_server 	= 'cucumber-language-server',
-  dagger 	= 'cuelsp',
-  denols 	= 'deno',
-  dhall_lsp_server 	= 'dhall-lsp',
-  diagnosticls 	= 'diagnostic-languageserver',
-  dockerls 	= 'dockerfile-language-server',
-  dotls 	= 'dot-language-server',
-  efm 	= 'efm',
-  elixirls 	= 'elixir-ls',
-  elmls 	= 'elm-language-server',
-  ember 	= 'ember-language-server',
-  emmet_ls 	= 'emmet-ls',
-  erg_language_server 	= 'erg-language-server',
-  erlangls 	= 'erlang-ls',
-  esbonio 	= 'esbonio',
-  eslint 	= 'eslint-lsp',
-  flux_lsp 	= 'flux-lsp',
-  foam_ls 	= 'foam-language-server',
-  fortls 	= 'fortls',
-  fsautocomplete 	= 'fsautocomplete',
-  glint 	= 'glint',
-  golangci_lint_ls 	= 'golangci-lint-langserver',
-  gopls 	= 'gopls',
-  gradle_ls 	= 'gradle-language-server',
-  grammarly 	= 'grammarly-languageserver',
-  graphql 	= 'graphql-language-service-cli',
-  groovyls 	= 'groovy-language-server',
-  haxe_language_server 	= 'haxe-language-server',
-  hls 	= 'haskell-language-server',
-  hoon_ls 	= 'hoon-language-server',
-  html 	= 'html-lsp',
-  intelephense 	= 'intelephense',
-  jdtls 	= 'jdtls',
-  jedi_language_server 	= 'jedi-language-server',
-  jsonls 	= 'json-lsp',
-  jsonnet_ls 	= 'jsonnet-language-server',
-  julials 	= 'julia-lsp',
-  kotlin_language_server 	= 'kotlin-language-server',
-  lelwel_ls 	= 'lelwel',
-  lemminx 	= 'lemminx',
-  ltex 	= 'ltex-ls',
-  luau_lsp 	= 'luau-lsp',
-  marksman 	= 'marksman',
-  mm0_ls 	= 'metamath-zero-lsp',
-  neocmake 	= 'neocmakelsp',
-  nickel_ls 	= 'nickel-lang-lsp',
-  nimls 	= 'nimlsp',
-  ocamllsp 	= 'ocaml-lsp',
-  omnisharp 	= 'omnisharp',
-  opencl_ls 	= 'opencl-language-server',
-  perlnavigator 	= 'perlnavigator',
-  phpactor 	= 'phpactor',
-  powershell_es 	= 'powershell-editor-services',
-  prismals 	= 'prisma-language-server',
-  prosemd_lsp 	= 'prosemd-lsp',
-  psalm 	= 'psalm',
-  puppet 	= 'puppet-editor-services',
-  purescriptls 	= 'purescript-language-server',
-  pylsp 	= 'python-lsp-server',
-  pyright 	= 'pyright',
-  quick_lint_js 	= 'quick-lint-js',
-  r_language_server 	= 'r-languageserver',
-  reason_ls 	= 'reason-language-server',
-  remark_ls 	= 'remark-language-server',
-  rescriptls 	= 'rescript-lsp',
-  rnix 	= 'rnix-lsp',
-  robotframework_ls 	= 'robotframework-lsp',
-  rome 	= 'rome',
-  ruby_ls 	= 'ruby-lsp',
-  rust_analyzer 	= 'rust-analyzer',
-  salt_ls 	= 'salt-lsp',
-  serve_d 	= 'serve-d',
-  slint_lsp 	= 'slint-lsp',
-  solang 	= 'solang',
-  solargraph 	= 'solargraph',
-  solc 	= 'solidity',
-  solidity 	= 'solidity-ls',
-  sorbet 	= 'sorbet',
-  sourcery 	= 'sourcery',
-  spectral 	= 'spectral-language-server',
-  sqlls 	= 'sqlls',
-  sqls 	= 'sqls',
-  stylelint_lsp 	= 'stylelint-lsp',
-  sumneko_lua 	= 'lua-language-server',
-  svelte 	= 'svelte-language-server',
-  svlangserver 	= 'svlangserver',
-  svls 	= 'svls',
-  tailwindcss 	= 'tailwindcss-language-server',
-  taplo 	= 'taplo',
-  teal_ls 	= 'teal-language-server',
-  terraformls 	= 'terraform-ls',
-  texlab 	= 'texlab',
-  tflint 	= 'tflint',
-  theme_check 	= 'shopify-theme-check',
-  tsserver 	= 'typescript-language-server',
-  vala_ls 	= 'vala-language-server',
-  verible 	= 'verible',
-  vimls 	= 'vim-language-server',
-  visualforce_ls 	= 'visualforce-language-server',
-  vls 	= 'vls',
-  vtsls 	= 'vtsls',
-  volar 	= 'vue-language-server',
-  vuels 	= 'vetur-vls',
-  wgsl_analyzer 	= 'wgsl-analyzer',
-  yamlls 	= 'yaml-language-server',
-  zk 	= 'zk',
-  zls 	= 'zls',
-}
-
 return {
-  'williamboman/mason.nvim',
+  'VonHeikemen/lsp-zero.nvim',
+  branch = 'v4.x',
   lazy = false,
   dependencies = {
-    -- lsp (language server support)
+    'williamboman/mason.nvim',
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "jose-elias-alvarez/nvim-lsp-ts-utils",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-    -- cmp (autocompletion)
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/nvim-cmp',
-    'windwp/nvim-autopairs',
-    'onsails/lspkind-nvim',
-
-    -- code snippets
-    'honza/vim-snippets',
-    'dcampos/cmp-snippy',
-    'dcampos/nvim-snippy',
-    'honza/vim-snippets',
-
-    -- null-ls (linting + formatting)
-    'nvim-lua/plenary.nvim',
-    'nvimtools/none-ls.nvim',
-    "jayp0521/mason-null-ls.nvim",
+    -- "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    local lsp_servers = {
-      vim.g.lsp_mason_mappings["eslint"],
-      vim.g.lsp_mason_mappings["biome"],
-      vim.g.lsp_mason_mappings["slint_lsp"],
-      vim.g.lsp_mason_mappings["tsserver"],
-      -- vim.g.lsp_mason_mappings["vtsls"],
-      vim.g.lsp_mason_mappings["cssls"],
-      -- vim.g.lsp_mason_mappings["intelephense"],
-      vim.g.lsp_mason_mappings["dockerls"],
-      vim.g.lsp_mason_mappings["dotls"],
-      vim.g.lsp_mason_mappings["graphql"],
-      vim.g.lsp_mason_mappings["html"],
-      -- vim.g.lsp_mason_mappings["rust_analyzer"],
-      vim.g.lsp_mason_mappings["yamlls"],
-      vim.g.lsp_mason_mappings["solargraph"],
-      vim.g.lsp_mason_mappings["phpactor"],
-    }
-
-    local null_ls = require('null-ls')
-    local snippy = require("snippy")
-    local lspkind = require('lspkind')
-    local cmp = require('cmp')
+    local lsp_zero = require('lsp-zero')
     local mason_lspconfig = require("mason-lspconfig")
 
-    -- configure LSP servers
-    local enhance_server_opts = {
-      ['sumneko_lua'] = function(options)
-        options.settings = {
-          Lua = { diagnostics = { globals = { 'vim' } } }
-        }
+    -- local lsp_attach = function(client, bufnr)
+    --   local opts = {buffer = bufnr}
+    -- end
 
-        -- prefer lsp formatting
-        options.on_attach = function(client, bufnr)
-        end
-      end,
-
-      ['tsserver'] = function(options)
-        options.on_attach = function(client, bufnr)
-          -- local ts_utils = require("nvim-lsp-ts-utils")
-          -- ts_utils.setup({})
-          -- ts_utils.setup_client(client)
-
-          -- let eslint do the formatting
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end
-      end,
-
-      ['eslint'] = function(options)
-        options.settings = {
-          enable = true,
-          format = { enable = true }, -- this will enable formatting
-          lintTask = {
-            enable = true
-          }
-        }
-
-        options.filetypes = {
-          'javascript', 'javascriptreact', 'javascript.jsx',
-          'typescript', 'typescriptreact', 'typescript.tsx', 'vue'
-        }
-
-        options.on_attach = function(client, bufnr)
-          client.server_capabilities.documentFormattingProvider = true
-          client.server_capabilities.documentRangeFormattingProvider = true
-          -- client.server_capabilities.document_formatting = true
-          -- client.server_capabilities.documentRangeFormattingProvider = true
-        end
-      end,
+    local lsp_servers = {
+      'lua_ls',
+      'rust_analyzer',
+      'ts_ls',
+      'biome',
+      'eslint',
+      'slint_lsp',
+      'cssls',
+      'dockerls',
+      'dotls',
+      'graphql',
+      'html',
+      'yamlls',
+      'solargraph',
+      'phpactor'
     }
 
-    require("mason").setup()
-
-    mason_lspconfig.setup({
-      automatic_installation = true
+    lsp_zero.extend_lspconfig({
+      sign_text = true,
+      -- lsp_attach = lsp_attach,
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
     })
 
-    -- settings shared across all LSP servers
-    local global_on_attach = function(client, _)
-      client.server_capabilities.documentFormattingProvider = true
-      client.server_capabilities.documentRangeFormattingProvider = true
-      -- navic.attach(client, bufnr)
-    end
+    lsp_zero.setup_servers(lsp_servers)
 
-    -- initialize buffer with appropriate LSP handler
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        if server_name == "tsserver" then
-          server_name = "ts_ls"
-        end
-
-        local server_capabilities = require("cmp_nvim_lsp").default_capabilities()
-        local options = { capabilities = server_capabilities }
-
-        if enhance_server_opts[server_name] then
-          enhance_server_opts[server_name](options)
-        end
-
-        local server_on_attach = options.on_attach
-
-        require("lspconfig")[server_name].setup({
-          on_attach = function(client, bufnr)
-            global_on_attach(client, bufnr)
-
-            if server_on_attach then
-              server_on_attach(client, bufnr)
-            end
-          end
-        })
-      end
-    })
-
-    -- auto update LSP servers
-    require('mason-tool-installer').setup({
+    require('mason').setup({})
+    require('mason-lspconfig').setup({
       ensure_installed = lsp_servers,
-      auto_update = true
-    })
 
-    -- install null-ls syntax checker deps
-    require("mason-null-ls").setup({
-      automatic_installation = true,
-      -- null_ls_sources = formatters,
-      auto_update = true
-    })
-    -- require("mason-null-ls").check_install(true)
-
-    -- linter / formatter
-    null_ls.setup({
-      sources = {
-        -- null_ls.builtins.formatting.prettierd
+      handlers = {
+        function(server_name)
+          require('lspconfig')[server_name].setup({})
+        end,
       }
     })
-
-    -- snippets
-    snippy.setup({
-      mappings = {
-        is = {
-          ["<Tab>"] = "expand_or_advance",
-          ["<S-Tab>"] = "previous",
-        },
-        nx = {
-          ["<leader>x"] = "cut_text",
-        },
-      },
-    })
-
-    -- completion
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          require'snippy'.expand_snippet(args.body)
-        end
-      },
-
-      formatting = {
-        format = lspkind.cmp_format(),
-      },
-
-      sources = cmp.config.sources({
-        {name = 'snippy', keyword_length = 2},
-        {name = 'nvim_lsp', keyword_length = 2},
-        {name = 'path'},
-      }),
-
-      view = {
-        entries = 'native'
-      }
-    }
-
-    -- auto-close parens + brackets
-    require('nvim-autopairs').setup({
-      disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
-      enable_afterquote = false,
-      -- enable_moveright = false,
-      check_ts = true
-    })
-
   end,
   keys = {
     -- format keymaps

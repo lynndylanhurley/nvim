@@ -1,14 +1,26 @@
 return {
   'dcampos/nvim-snippy',
+  lazy = false,
   dependencies = {
-    { 'honza/vim-snippets' },
-    { 'dcampos/cmp-snippy' }
+    -- code snippets
+    'honza/vim-snippets',
+    'dcampos/cmp-snippy',
+    'honza/vim-snippets',
   },
   config = function()
-    -- vim.api.nvim_set_keymap('i', '<Tab>', "snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-next)' : '<Tab>'", { expr = true })
-    -- vim.api.nvim_set_keymap('i', '<S-Tab>', "snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<Tab>'", { expr = true })
-    -- vim.api.nvim_set_keymap('s', '<Tab>', "snippy#can_jump(1) ? '<Plug>(snippy-next)' : '<Tab>'", { expr = true })
-    -- vim.api.nvim_set_keymap('s', '<S-Tab>', "snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<S-Tab>'", { expr = true })
-    -- vim.api.nvim_set_keymap('x', '<Tab>', '<Plug>(snippy-cut-text)', {})
+    local snippy = require('snippy');
+
+    -- snippets
+    snippy.setup({
+      mappings = {
+        is = {
+          ["<Tab>"] = "expand_or_advance",
+          ["<S-Tab>"] = "previous",
+        },
+        nx = {
+          ["<leader>x"] = "cut_text",
+        },
+      },
+    })
   end
 }

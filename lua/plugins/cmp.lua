@@ -1,41 +1,19 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    { 'hrsh7th/cmp-path' },
-    { 'onsails/lspkind-nvim' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-nvim-lua' },
-    { 'honza/vim-snippets' },
-    { 'dcampos/cmp-snippy' },
-    { 'dcampos/nvim-snippy' },
-    { 'honza/vim-snippets' },
-    { 'windwp/nvim-autopairs' },
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/nvim-cmp',
+    'windwp/nvim-autopairs',
+    'onsails/lspkind-nvim',
   },
   config = function()
     local cmp = require('cmp')
-    local snippy = require("snippy")
     local lspkind = require('lspkind')
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-    require('nvim-autopairs').setup({
-      disable_filetype = { "TelescopePrompt" , "guihua", "guihua_rust", "clap_input" },
-      enable_afterquote = false,
-      enable_moveright = false,
-      check_ts = true
-    })
-
-    snippy.setup({
-      mappings = {
-        is = {
-          ["<Tab>"] = "expand_or_advance",
-          ["<S-Tab>"] = "previous",
-        },
-        nx = {
-          ["<leader>x"] = "cut_text",
-        },
-      },
-    })
-
+    -- completion
     cmp.setup {
       snippet = {
         expand = function(args)
@@ -58,9 +36,5 @@ return {
       }
     }
 
-    cmp.event:on(
-      'confirm_done',
-      cmp_autopairs.on_confirm_done()
-    )
   end
 }
